@@ -8,14 +8,31 @@ import json
 import gradio as gr
 from dotenv import load_dotenv
 from job_agent import (
-    run_agent, view_applications, load_tracker,
-    search_jobs, fetch_ats_jobs, score_job_fit,
-    tailor_resume, track_application, TOOL_FN_MAP
+    run_agent, view_applications,
+    search_jobs, fetch_ats_jobs,
+    track_application, TOOL_FN_MAP
 )
 
 load_dotenv()
 
 MEMORY_WINDOW = 10
+CHAT_LOG_PATH = "chat_log.json"
+
+
+def save_chat_log(history_display):
+    with open(CHAT_LOG_PATH, "w") as f:
+        json.dump({"display": history_display}, f)
+
+
+def load_chat_log():
+    if os.path.exists(CHAT_LOG_PATH):
+        try:
+            with open(CHAT_LOG_PATH) as f:
+                return json.load(f).get("display", "")
+        except Exception:
+            return ""
+    return ""
+
 
 def trim_history(history):
     if len(history) > MEMORY_WINDOW:
@@ -28,9 +45,13 @@ def trim_history(history):
     return history
 
 
+def get_tracker_text():
+    return view_applications("all")
+
+
 def chat(user_message, history_display, agent_history):
     if not user_message.strip():
-        return history_display, agent_history, "", ""
+        return history_display, agent_history, "", "", get_tracker_text()
 
     agent_history = trim_history(agent_history)
     tool_log = []
@@ -53,25 +74,18 @@ def chat(user_message, history_display, agent_history):
     finally:
         TOOL_FN_MAP.update(original_map)
 
-    history_display = history_display + f"\n\nYou: {user_message}\n\nAgent: {answer}"
+    history_display = (history_display + f"\n\nYou: {user_message}\n\nAgent: {answer}").strip()
+    # chat is intentionally not persisted across refreshes
+
     tool_display = "\n\n---\n\n".join(tool_log) if tool_log else "No tools called"
-    return history_display.strip(), agent_history, "", tool_display
+    return history_display, agent_history, "", tool_display, get_tracker_text()
 
 
-def get_tracker_text():
-    return view_applications("all")
+def clear_chat():
+    if os.path.exists(CHAT_LOG_PATH):
+        os.remove(CHAT_LOG_PATH)
+    return "", [], "", "", get_tracker_text()
 
-def quick_search(query):
-    return search_jobs(query)
-
-def quick_fetch(slug, platform):
-    return fetch_ats_jobs(slug, platform)
-
-def quick_score(jd):
-    return score_job_fit(jd)
-
-def quick_tailor(jd):
-    return tailor_resume(jd)
 
 def quick_track(company, role, status, notes):
     result = track_application(company, role, status, notes)
@@ -94,108 +108,74 @@ with gr.Blocks(title="Job Hunting Agent") as demo:
             )
             with gr.Row():
                 msg = gr.Textbox(
-                    placeholder="e.g. fetch jobs at recursion",
+                    placeholder="e.g. fetch jobs at anthropic / write a cover letter for ramp software engineer",
                     label="Message", scale=5
                 )
-                send_btn = gr.Button("Send", variant="primary", scale=1)
+                send_btn  = gr.Button("Send", variant="primary", scale=1)
+                clear_btn = gr.Button("Clear", scale=1)
 
             with gr.Row():
-                btn_search = gr.Button("Search new grad AI 2026")
-                btn_citadel = gr.Button("Fetch Citadel jobs")
+                btn_search    = gr.Button("Search new grad AI 2026")
+                btn_citadel   = gr.Button("Fetch Citadel jobs")
                 btn_recursion = gr.Button("Fetch Recursion jobs")
-                btn_ramp = gr.Button("Fetch Ramp jobs (Lever)")
+                btn_ramp      = gr.Button("Fetch Ramp jobs (Lever)")
 
             tool_log_display = gr.Textbox(label="Tool Log", lines=6, interactive=False)
-
-            send_btn.click(
-                chat,
-                [msg, chat_display, agent_history],
-                [chat_display, agent_history, msg, tool_log_display]
-            )
-            msg.submit(
-                chat,
-                [msg, chat_display, agent_history],
-                [chat_display, agent_history, msg, tool_log_display]
-            )
-            btn_search.click(
-                lambda d, ah: chat("search for AI ML engineer new grad 2026", d, ah),
-                [chat_display, agent_history],
-                [chat_display, agent_history, msg, tool_log_display]
-            )
-            btn_citadel.click(
-                lambda d, ah: chat("fetch jobs at citadel", d, ah),
-                [chat_display, agent_history],
-                [chat_display, agent_history, msg, tool_log_display]
-            )
-            btn_recursion.click(
-                lambda d, ah: chat("fetch jobs at recursion", d, ah),
-                [chat_display, agent_history],
-                [chat_display, agent_history, msg, tool_log_display]
-            )
-            btn_ramp.click(
-                lambda d, ah: chat("fetch jobs at ramp / lever", d, ah),
-                [chat_display, agent_history],
-                [chat_display, agent_history, msg, tool_log_display]
-            )
-
-        with gr.Tab("Quick Tools"):
-            with gr.Row():
-                with gr.Column():
-                    gr.Markdown("### Search Jobs")
-                    search_q = gr.Textbox(label="Query", placeholder="AI engineer biotech new grad 2026")
-                    search_btn = gr.Button("Search", variant="primary")
-                    search_out = gr.Textbox(label="Results", lines=12)
-                    search_btn.click(quick_search, search_q, search_out)
-
-                with gr.Column():
-                    gr.Markdown("### Fetch Company ATS Jobs")
-                    ats_slug = gr.Textbox(label="Company slug", placeholder="recursion, ramp, citadel")
-                    ats_platform = gr.Radio(["greenhouse", "lever"], value="greenhouse", label="Platform")
-                    ats_btn = gr.Button("Fetch", variant="primary")
-                    ats_out = gr.Textbox(label="Results", lines=12)
-                    ats_btn.click(quick_fetch, [ats_slug, ats_platform], ats_out)
-
-            with gr.Row():
-                with gr.Column():
-                    gr.Markdown("### Score Fit")
-                    score_jd = gr.Textbox(label="Paste job description", lines=8)
-                    score_btn = gr.Button("Score my fit", variant="primary")
-                    score_out = gr.Textbox(label="Score + Gaps", lines=10)
-                    score_btn.click(quick_score, score_jd, score_out)
-
-                with gr.Column():
-                    gr.Markdown("### Tailor Resume")
-                    tailor_jd = gr.Textbox(label="Paste job description", lines=8)
-                    tailor_btn = gr.Button("Tailor resume", variant="primary")
-                    tailor_out = gr.Textbox(label="Tailored summary + bullets", lines=10)
-                    tailor_btn.click(quick_tailor, tailor_jd, tailor_out)
 
         with gr.Tab("Application Tracker"):
             gr.Markdown("### Track Application")
             with gr.Row():
                 t_company = gr.Textbox(label="Company", placeholder="SystImmune")
-                t_role    = gr.Textbox(label="Role", placeholder="Applied AI Engineer I")
+                t_role    = gr.Textbox(label="Role",    placeholder="Applied AI Engineer I")
                 t_status  = gr.Dropdown(
                     ["applied","phone_screen","interview","offer","rejected","withdrawn"],
                     value="applied", label="Status"
                 )
-                t_notes   = gr.Textbox(label="Notes")
+                t_notes = gr.Textbox(label="Notes")
             track_btn = gr.Button("Add / Update", variant="primary")
             track_out = gr.Textbox(label="Result", lines=2)
             gr.Markdown("### All Applications")
-            tracker_out = gr.Textbox(label="", lines=15, interactive=False, value=get_tracker_text())
+            tracker_out = gr.Textbox(label="", lines=15, interactive=False)
             track_btn.click(quick_track, [t_company, t_role, t_status, t_notes], [track_out, tracker_out])
 
         with gr.Tab("ATS Slugs"):
             gr.Markdown("""
 ### Greenhouse slugs
-`recursion` `genentech` `citadel` `palantir` `openai` `anthropic` `twosigma` `deshaw`
+`recursionpharmaceuticals` `genentech` `citadel` `palantir` `openai` `anthropic` `stripe` `twosigma` `deshaw`
 
 ### Lever slugs
-`ramp` `stripe` `notion` `scale-ai` `tempus-ex` `jane-street`
+`ramp` `notion` `scale-ai` `tempus-ex` `jane-street`
 
-> If a slug 404s, try with/without hyphens or switch platforms.
+> If a slug 404s, the tool auto-retries known aliases then suggests the other platform.
             """)
+
+    # Wire chat events after tracker_out is defined
+    chat_outputs = [chat_display, agent_history, msg, tool_log_display, tracker_out]
+
+    send_btn.click(chat, [msg, chat_display, agent_history], chat_outputs)
+    msg.submit(chat,     [msg, chat_display, agent_history], chat_outputs)
+    clear_btn.click(clear_chat, [], chat_outputs)
+
+    btn_search.click(
+        lambda d, ah: chat("search for AI ML engineer new grad 2026", d, ah),
+        [chat_display, agent_history], chat_outputs
+    )
+    btn_citadel.click(
+        lambda d, ah: chat("fetch jobs at citadel", d, ah),
+        [chat_display, agent_history], chat_outputs
+    )
+    btn_recursion.click(
+        lambda d, ah: chat("fetch jobs at recursionpharmaceuticals", d, ah),
+        [chat_display, agent_history], chat_outputs
+    )
+    btn_ramp.click(
+        lambda d, ah: chat("fetch jobs at ramp / lever", d, ah),
+        [chat_display, agent_history], chat_outputs
+    )
+
+    # chat clears on refresh — no load
+    demo.load(get_tracker_text, outputs=tracker_out)
+
 
 if __name__ == "__main__":
     demo.launch()

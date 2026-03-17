@@ -21,10 +21,19 @@ import anthropic
 PROFILE_PATH  = Path("profile.yaml")
 TRACKER_PATH  = Path("applications.json")
 MODEL         = "claude-sonnet-4-20250514"
-MAX_TOKENS    = 1024
+MAX_TOKENS    = 4096
 MEMORY_WINDOW = 10
 SERPAPI_KEY   = os.environ.get("SERPAPI_API_KEY", "")
 client        = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY", ""))
+
+# ── Slug aliases (auto-retry on 404) ─────────────────────────────────────────
+SLUG_ALIASES = {
+    "recursion":   ["recursionpharmaceuticals", "recursionpharma"],
+    "twosigma":    ["two-sigma"],
+    "deshaw":      ["de-shaw"],
+    "janest":      ["jane-street"],
+    "scaleai":     ["scale-ai"],
+}
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -87,8 +96,29 @@ def fetch_ats_jobs(company_slug: str, platform: str = "greenhouse") -> str:
             return f"Unknown platform '{platform}'. Use 'greenhouse' or 'lever'."
 
         r = requests.get(url, timeout=15)
+
+        # Auto-retry with known aliases on 404
         if r.status_code == 404:
-            return f"Slug '{company_slug}' not found on {platform}. Try a different slug or platform."
+            aliases = SLUG_ALIASES.get(company_slug.lower(), [])
+            for alt in aliases:
+                if platform == "greenhouse":
+                    alt_url = f"https://boards-api.greenhouse.io/v1/boards/{alt}/jobs?content=true"
+                else:
+                    alt_url = f"https://api.lever.co/v0/postings/{alt}?mode=json"
+                r2 = requests.get(alt_url, timeout=15)
+                if r2.status_code == 200:
+                    r = r2
+                    company_slug = alt
+                    url = alt_url
+                    break
+            else:
+                other = "lever" if platform == "greenhouse" else "greenhouse"
+                return (
+                    f"Slug '{company_slug}' not found on {platform}. "
+                    f"Tried aliases: {aliases or 'none'}. "
+                    f"Try '{other}' platform or check the ATS Slugs tab."
+                )
+
         r.raise_for_status()
         data = r.json()
 
@@ -209,6 +239,113 @@ def track_application(company: str, role: str, status: str, notes: str = "") -> 
     return f"Tracked: {company} — {role} ({status})"
 
 
+def fetch_job_description(company_slug: str, role_query: str, platform: str = "greenhouse") -> str:
+    """Find a specific job at a company and return its full description."""
+    try:
+        if platform == "greenhouse":
+            url = f"https://boards-api.greenhouse.io/v1/boards/{company_slug}/jobs?content=true"
+        else:
+            url = f"https://api.lever.co/v0/postings/{company_slug}?mode=json"
+
+        r = requests.get(url, timeout=15)
+
+        # Auto-retry aliases on 404
+        if r.status_code == 404:
+            for alt in SLUG_ALIASES.get(company_slug.lower(), []):
+                alt_url = url.replace(company_slug, alt)
+                r2 = requests.get(alt_url, timeout=15)
+                if r2.status_code == 200:
+                    r = r2
+                    company_slug = alt
+                    break
+            else:
+                other = "lever" if platform == "greenhouse" else "greenhouse"
+                return f"Slug '{company_slug}' not found. Try '{other}' platform."
+
+        r.raise_for_status()
+        data = r.json()
+        jobs = data.get("jobs", []) if platform == "greenhouse" else (data if isinstance(data, list) else [])
+
+        if not jobs:
+            return f"No open roles found at {company_slug}."
+
+        # Fuzzy match role title
+        query_lower = role_query.lower()
+        best = None
+        best_score = 0
+        for j in jobs:
+            title = j.get("title", "").lower()
+            # Score by how many query words appear in title
+            words = query_lower.split()
+            score = sum(1 for w in words if w in title)
+            if score > best_score:
+                best_score = score
+                best = j
+
+        if not best or best_score == 0:
+            # Fall back: list available roles
+            titles = [j.get("title", "?") for j in jobs[:10]]
+            return f"No close match for '{role_query}'. Available roles:\n" + "\n".join(f"- {t}" for t in titles)
+
+        # Extract full description
+        if platform == "greenhouse":
+            title = best.get("title", "?")
+            location = best.get("location", {}).get("name", "N/A")
+            link = best.get("absolute_url", "")
+            content = best.get("content", "")
+            # Strip HTML tags simply
+            import re
+            content = re.sub(r"<[^>]+>", " ", content)
+            content = re.sub(r"\s+", " ", content).strip()
+            return f"ROLE: {title}\nLOCATION: {location}\nURL: {link}\n\nDESCRIPTION:\n{content[:4000]}"
+        else:
+            title = best.get("text", "?")
+            location = best.get("categories", {}).get("location", "N/A")
+            link = best.get("hostedUrl", "")
+            lists = best.get("lists", [])
+            content = "\n\n".join(f"{l.get('text','')}\n{l.get('content','')}" for l in lists)
+            import re
+            content = re.sub(r"<[^>]+>", " ", content)
+            content = re.sub(r"\s+", " ", content).strip()
+            return f"ROLE: {title}\nLOCATION: {location}\nURL: {link}\n\nDESCRIPTION:\n{content[:4000]}"
+
+    except Exception as e:
+        return f"JD fetch failed: {e}"
+
+
+def generate_cover_letter(job_description: str, company: str, role: str) -> str:
+    try:
+        profile = load_profile()
+        resp = client.messages.create(
+            model=MODEL, max_tokens=800,
+            messages=[{"role": "user", "content":
+                f"""You are a professional cover letter writer. Write a concise,
+specific cover letter for this candidate.
+
+Rules:
+- 3 paragraphs max
+- Opening: why THIS company and role specifically (not generic)
+- Middle: 2-3 most relevant projects/experiences with concrete details
+- Closing: one sentence, no fluff
+- Do NOT use phrases like "I am excited to" or "passionate about"
+- Do NOT invent experience
+- Address: Dear [Company] Hiring Team
+
+CANDIDATE PROFILE:
+{yaml.dump(profile, default_flow_style=False)}
+
+COMPANY: {company}
+ROLE: {role}
+
+JOB DESCRIPTION:
+{job_description[:3000]}
+"""}]
+        )
+        return resp.content[0].text
+    except Exception as e:
+        return f"Cover letter generation failed: {e}"
+
+
 def view_applications(status_filter: str = "all") -> str:
     apps = load_tracker()
     if not apps:
@@ -247,13 +384,14 @@ TOOLS = [
         "description": (
             "Fetch live job listings directly from a specific company's ATS (Greenhouse or Lever). "
             "More reliable than search for specific companies. "
-            "Greenhouse slugs: recursion, genentech, citadel, palantir, openai, anthropic, stripe. "
-            "Lever slugs: ramp, notion, scale-ai, tempus-ex, jane-street."
+            "Greenhouse slugs: recursionpharmaceuticals, genentech, citadel, palantir, openai, anthropic, stripe, twosigma, deshaw. "
+            "Lever slugs: ramp, notion, scale-ai, tempus-ex, jane-street. "
+            "If a slug fails, the tool will auto-retry known aliases and suggest the other platform."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
-                "company_slug": {"type": "string", "description": "Company ATS slug e.g. 'recursion', 'ramp', 'stripe'"},
+                "company_slug": {"type": "string", "description": "Company ATS slug e.g. 'recursionpharmaceuticals', 'ramp', 'stripe'"},
                 "platform": {"type": "string", "enum": ["greenhouse", "lever"], "description": "ATS platform (default: greenhouse)"}
             },
             "required": ["company_slug"]
@@ -296,6 +434,37 @@ TOOLS = [
         }
     },
     {
+        "name": "fetch_job_description",
+        "description": (
+            "Fetch the full job description for a specific role at a company directly from their ATS. "
+            "Use this before score_job_fit, tailor_resume, or generate_cover_letter so the user "
+            "doesn't have to paste the JD manually. "
+            "Use the same company slugs as fetch_ats_jobs."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "company_slug": {"type": "string", "description": "Company ATS slug e.g. 'anthropic', 'ramp'"},
+                "role_query":   {"type": "string", "description": "Role title to search for e.g. 'Applied AI Engineer'"},
+                "platform":     {"type": "string", "enum": ["greenhouse", "lever"], "description": "ATS platform (default: greenhouse)"}
+            },
+            "required": ["company_slug", "role_query"]
+        }
+    },
+    {
+        "name": "generate_cover_letter",
+        "description": "Generate a tailored cover letter for a specific job and company.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "job_description": {"type": "string", "description": "Full job description text"},
+                "company":         {"type": "string", "description": "Company name e.g. 'SystImmune'"},
+                "role":            {"type": "string", "description": "Role title e.g. 'Applied AI Engineer I'"},
+            },
+            "required": ["job_description", "company", "role"]
+        }
+    },
+    {
         "name": "view_applications",
         "description": "View tracked job applications, optionally filtered by status.",
         "input_schema": {
@@ -316,14 +485,18 @@ TOOL_FN_MAP = {
     "fetch_ats_jobs":    lambda i: fetch_ats_jobs(i["company_slug"], i.get("platform", "greenhouse")),
     "score_job_fit":     lambda i: score_job_fit(i["job_description"]),
     "tailor_resume":     lambda i: tailor_resume(i["job_description"]),
-    "track_application": lambda i: track_application(i["company"], i["role"], i["status"], i.get("notes", "")),
-    "view_applications": lambda i: view_applications(i.get("status_filter", "all")),
+    "fetch_job_description":  lambda i: fetch_job_description(i["company_slug"], i["role_query"], i.get("platform", "greenhouse")),
+    "track_application":    lambda i: track_application(i["company"], i["role"], i["status"], i.get("notes", "")),
+    "view_applications":    lambda i: view_applications(i.get("status_filter", "all")),
+    "generate_cover_letter": lambda i: generate_cover_letter(i["job_description"], i["company"], i["role"]),
 }
 
 SYSTEM = """You are a job-hunting assistant helping a candidate find, evaluate, and track jobs.
 The candidate is a 2026 new grad (Math + Econ, Hamilton College) with ML/AI engineering experience.
 Target areas: biotech AI, healthcare AI, tech, fintech/quant.
 Use fetch_ats_jobs for specific companies, search_jobs for broad searches.
+When asked to score fit, tailor resume, or write a cover letter for a specific company+role,
+ALWAYS call fetch_job_description first to get the JD automatically — do not ask the user to paste it.
 Be concise in final answers."""
 
 # ── Agent loop ────────────────────────────────────────────────────────────────
@@ -364,13 +537,13 @@ def run_agent(user_input: str, history: list) -> tuple:
 
 BANNER = """
 ╔══════════════════════════════════════════════════════╗
-║           Job Hunting Agent  v2.1                    ║
+║           Job Hunting Agent  v2.2                    ║
 ║  Tools: search · fetch · score · tailor · track      ║
 ║  Type 'quit' to exit, 'apps' to view tracker         ║
 ╚══════════════════════════════════════════════════════╝
 Examples:
   > search for AI engineer new grad 2026 fintech
-  > fetch jobs at recursion
+  > fetch jobs at recursionpharmaceuticals
   > fetch jobs at ramp / lever
   > fetch jobs at citadel
   > score my fit for [paste job description]
