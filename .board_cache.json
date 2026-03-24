@@ -1,0 +1,2326 @@
+{
+  "date": "2026-03-23",
+  "fetched_at": "12:27",
+  "jobs": [
+    {
+      "company": "Northwestern University",
+      "role": "Research Data Analyst Associate, Rheumatology",
+      "location": "Chicago, IL",
+      "date": "Mar 23",
+      "link": "https://jobright.ai/jobs/info/699be0e981476f6176b44a2d?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Research Data Analyst Associate, Infectious Disease",
+      "location": "Chicago, IL",
+      "date": "Mar 23",
+      "link": "https://jobright.ai/jobs/info/699ff512ce78e77b4fe5fe3e?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "RemoteHunter",
+      "role": "Junior Data Analyst (Remote)",
+      "location": "United States",
+      "date": "Mar 23",
+      "link": "https://jobright.ai/jobs/info/69c11af62c312363dcd3db61?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Aquatic Capital Management",
+      "role": "Quantitative Researcher, PhD",
+      "location": "Chicago, New York",
+      "date": "Mar 23",
+      "link": "https://jobright.ai/jobs/info/6972d75b98522904c697a99d?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "National Security Agency",
+      "role": "Data Scientist Development Program (DSDP) - Entry to Expert ",
+      "location": "Fort Meade, MD",
+      "date": "Mar 23",
+      "link": "https://jobright.ai/jobs/info/69c0f9467798f73e35e5b809?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist Development Program (DSDP)",
+      "location": "Fort Meade, MD",
+      "date": "Mar 23",
+      "link": "https://jobright.ai/jobs/info/69c1080d2c312363dcd3c012?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "San Francisco Campus for Jewish Living",
+      "role": "Clinical Data Analyst",
+      "location": "San Francisco, CA",
+      "date": "Mar 22",
+      "link": "https://jobright.ai/jobs/info/69b0b5387495006450977fab?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Press Ganey",
+      "role": "Data Scientist II",
+      "location": "Chicago, IL",
+      "date": "Mar 22",
+      "link": "https://jobright.ai/jobs/info/69c0a98a7798f73e35e51f04?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist II",
+      "location": "Chicago, IL",
+      "date": "Mar 22",
+      "link": "https://jobright.ai/jobs/info/69c094772c312363dcd2f3b1?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "edkey",
+      "role": "Data Analyst (Remote)",
+      "location": "Itasca, IL",
+      "date": "Mar 22",
+      "link": "https://jobright.ai/jobs/info/69c085a22c312363dcd2f156?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Hearst Magazines",
+      "role": "Data Analyst, Social Media & Video",
+      "location": "New York, NY",
+      "date": "Mar 22",
+      "link": "https://jobright.ai/jobs/info/69bfa0632c312363dcd2627d?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Revantage, A Blackstone Portfolio Compan",
+      "role": "Analyst, Junior Quantitative Developer",
+      "location": "United States",
+      "date": "Mar 22",
+      "link": "https://jobright.ai/jobs/info/69869f7f0f6f7e7a2ce1a9f8?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Cerberus Capital Management",
+      "role": "RMBS Mortgage Trading Desk - Quantitative Analyst/Programmer",
+      "location": "New York, United States",
+      "date": "Mar 22",
+      "link": "https://jobright.ai/jobs/info/68f7e09c5dc1be601281d69e?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "RemoteHunter",
+      "role": "Business Value Management Data Analyst",
+      "location": "United States",
+      "date": "Mar 22",
+      "link": "https://jobright.ai/jobs/info/69bfbb3779e36d3a847c6193?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "BMO Capital Markets",
+      "role": "Associate, Quantitative Modelling",
+      "location": "Toronto, ON",
+      "date": "Mar 21",
+      "link": "https://jobright.ai/jobs/info/69bee07d48282272930196e5?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "DarkVision",
+      "role": "Data Analyst, In-line Inspection",
+      "location": "North Vancouver, BC",
+      "date": "Mar 21",
+      "link": "https://jobright.ai/jobs/info/69a3d5ad359fe034b1cebf35?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Ipsos in US",
+      "role": "Research Analyst, Innovation",
+      "location": "Chicago, IL",
+      "date": "Mar 21",
+      "link": "https://jobright.ai/jobs/info/696975d91703f05405ab610c?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Connor, Clark & Lunn Investment Manageme",
+      "role": "Data Scientist, Investment Data",
+      "location": "Vancouver, BC",
+      "date": "Mar 21",
+      "link": "https://jobright.ai/jobs/info/6930ce96fa28370be26b4088?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Booz Allen Hamilton",
+      "role": "Data Scientist",
+      "location": "Washington, DC",
+      "date": "Mar 21",
+      "link": "https://jobright.ai/jobs/info/698659af8ca8121a3a689195?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist",
+      "location": "Reston, VA",
+      "date": "Mar 21",
+      "link": "https://jobright.ai/jobs/info/698654c68ca8121a3a688910?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Masimo",
+      "role": "Data Analytics Engineer",
+      "location": "Irvine, CA",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69be99fc393a1008f7448001?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "RIVO Holdings, LLC",
+      "role": "Junior Data Scientist",
+      "location": "San Diego, CA",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69be0cfcb106024562836f2c?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "North East Medical Services",
+      "role": "DATA ANALYST I",
+      "location": "Daly City, CA 94014",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69be19dab106024562838126?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Zachary Piper Solutions",
+      "role": "Data Scientist",
+      "location": "Tampa, FL",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdfaf5b10602456283604b?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Booz Allen Hamilton",
+      "role": "Data Scientist",
+      "location": "Atlanta, GA",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdfaee393a1008f743d6b9?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "RIVO Holdings, LLC",
+      "role": "Junior Data Scientist",
+      "location": "530 B St, San Diego, CA 92101,",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdf9f1482822729300b166?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Kharon",
+      "role": "Research Analyst, Sanctions Monitoring",
+      "location": "New York, NY",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdddc9b106024562834323?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "People Incorporated Mental Health Servic",
+      "role": "Data Analyst",
+      "location": "Eagan, MN",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdd0aab106024562831148?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "PayPal",
+      "role": "Data Scientist - Payments Risk Management & Data Analytics",
+      "location": "Austin, TX",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdc527393a1008f74351ea?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist - Payments Risk Management & Data Analytics",
+      "location": "Scottsdale, AZ",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdc50f393a1008f7435138?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "J.S. Held LLC",
+      "role": "Data Analyst \u2013 Health Sciences",
+      "location": "New Orleans, LA",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdc1784828227293002a9e?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "PayPal",
+      "role": "Data Scientist - Payments Risk Management & Data Analytics",
+      "location": "San Jose, CA",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdc13f482822729300296f?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Future Standard",
+      "role": "Associate, Quant Engineer",
+      "location": "NYC Metro Area",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdbdbfb10602456282d3c9?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "PayPal",
+      "role": "Data Scientist - Payments Risk Management & Data Analytics",
+      "location": "Chicago, IL",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdba9c482822729300150f?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Brigham Young University",
+      "role": "Data Analyst",
+      "location": "Provo, UT",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdd8b0b106024562832e5e?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "World's Finest\u00ae Chocolate",
+      "role": "Sales Data Analyst",
+      "location": "Chicago, IL",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdb46fb10602456282ae89?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "National Radio Astronomy Observatory",
+      "role": "Scientific Data Analyst I",
+      "location": "NRAO Headquarters, 520 Edgemon",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bdcb4ab1060245628304a5?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Federated Hermes",
+      "role": "Associate Quantitative Analyst \u2013 MDT",
+      "location": "Boston, MA",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bda84fb1060245628298be?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "PayPal",
+      "role": "Data Scientist - Payments Risk Management & Data Analytics",
+      "location": "Austin, Texas, United States o",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bda5504828227293ffddd9?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist - Payments Risk Management & Data Analytics",
+      "location": "San Jose, California, United S",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bda5504828227293ffddef?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist - Payments Risk Management & Data Analytics",
+      "location": "Chicago, Illinois, United Stat",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bda545b1060245628292af?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist - Payments Risk Management & Data Analytics",
+      "location": "Scottsdale, Arizona, United St",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bda53e393a1008f742fe44?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Ipsos in US",
+      "role": "Research Analyst, Innovation",
+      "location": "New York, NY",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/6969c8ed1703f05405abcbb8?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Jobs via eFinancialCareers",
+      "role": "Quantitative Researcher - Entry Level - Anson McCade",
+      "location": "Chicago, IL",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bd7fa24828227293ffb644?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "ELM Utility Services",
+      "role": "Data Analyst ($55,000 to $75,000/annually DOE)",
+      "location": "Missoula, MT",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bd685ab106024562824ba3?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "FDM Group",
+      "role": "Data Analyst",
+      "location": "Vancouver, BC",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bd64cc393a1008f742bcc5?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Labour Market Information Council (LMIC)",
+      "role": "Junior Data Scientist",
+      "location": "Canada",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bd8750393a1008f742e1fa?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Research Data Analyst Associate",
+      "location": "Chicago, IL",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69a0147f53d97f23ee65d147?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Cushman & Wakefield",
+      "role": "Research Analyst",
+      "location": "Los Angeles, CA",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69858bf78da7a612046037c7?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Booz Allen Hamilton",
+      "role": "Data Scientist",
+      "location": "Annapolis Junction, MD",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69a11dab81476f6176bb7598?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist",
+      "location": "Fort Meade, MD",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69a133675218a81676726e8f?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist",
+      "location": "Fort Meade, MD",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69a1323b5218a81676726d00?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist",
+      "location": "Fort Meade, MD",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69a11e2e5218a81676725612?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist",
+      "location": "Annapolis Junction, MD",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69a125e46b458d060735df19?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "General Dynamics Information Technology",
+      "role": "Human Performance Data Scientist I",
+      "location": "Hurlburt Field, FL",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69b2c509ae2a534885e9ef9f?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "DHL Supply Chain",
+      "role": "Business Data Analyst I",
+      "location": "Whiteland, IN",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bd0477b10602456281e05d?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Business Data Analyst I",
+      "location": "Fort Smith, AR",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bd04634828227293ff3308?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "KPMG Canada",
+      "role": "Data Analyst, Ontario & Atlantic Tax",
+      "location": "Toronto, ON",
+      "date": "Mar 20",
+      "link": "https://jobright.ai/jobs/info/69bcfe4045e08b3dc1f9f915?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Rush Enterprises, Inc",
+      "role": "Data Scientist",
+      "location": "New Braunfels, TX",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bcc18fe6a0d9792584cc62?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "NRC Health",
+      "role": "Research Analyst",
+      "location": "Lincoln, NE",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bcabece6a0d9792584af4b?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "MVP Health Care",
+      "role": "Professional, Data Analyst",
+      "location": "Schenectady, NY",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bc80645b89c002acf23ecd?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Children's Hospital of Philadelphia",
+      "role": "Research Data Analyst I",
+      "location": "Philadelphia, PA",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bc4f3a4828227293fdf144?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "NBCUniversal",
+      "role": "Data Analyst, Digital Media Sales & Innovation NBCUniversal ",
+      "location": "New York, NY",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bc3bdb4828227293fdd2a6?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "DreamWorks Animation",
+      "role": "Data Analyst, Digital Media Sales & Innovation NBCUniversal ",
+      "location": "30 Rockefeller Plaza, New York",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bc3b8a45e08b3dc1f8987a?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "MVP Health Care",
+      "role": "Professional, Data Analyst",
+      "location": "Rochester, NY",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bc36914828227293fdba34?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Momentum Financial Services Group",
+      "role": "Data Analyst, Collections Operations & KPIs",
+      "location": "Toronto, ON",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bc277b4828227293fd9032?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Momentum Financial Services Group",
+      "role": "Data Analyst, Collections Operations & KPIs",
+      "location": "Toronto, Canada",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bc0fd75b89c002acf10863?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "The Walt Disney Company",
+      "role": "Associate Data Analyst",
+      "location": "New York, NY",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bbee6245e08b3dc1f7c04b?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "BGIS",
+      "role": "Real Estate Research Analyst",
+      "location": "Markham, ON",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/699fffb5ce78e77b4fe61c18?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "DHL Supply Chain",
+      "role": "Business Data Analyst II",
+      "location": "Louisville, KY",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69c1324b2c312363dcd3f250?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Gotion Inc.",
+      "role": "Data Analyst",
+      "location": "Manteno, IL",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69a6789fd706a731db386745?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Kohler Co.",
+      "role": "Data Analyst, Digital Shelf",
+      "location": "Kohler, WI",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bd1851b1060245628200f3?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Corebridge Financial",
+      "role": "ERM Business Data Analyst",
+      "location": "Jersey City, NJ",
+      "date": "Mar 19",
+      "link": "https://jobright.ai/jobs/info/69bbb02006c1ba00c54e4487?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Corebridge Financial",
+      "role": "ERM Business Data Analyst",
+      "location": "Houston, TX",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb9c7b569738374141afb6?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Charles River Laboratories",
+      "role": "Research Analyst I - Discovery",
+      "location": "Mattawan, MI",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb66ee5697383741416547?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "TriWest Healthcare Alliance",
+      "role": "Data Analyst - Provider Services",
+      "location": "Phoenix, AZ",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb65255697383741416487?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Corebridge Financial",
+      "role": "ERM Business Data Analyst",
+      "location": "NJ-Jersey City",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb437c06c1ba00c54dbe2a?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Washington State Hospital Association",
+      "role": "Data Analyst",
+      "location": "WSHA Legal Address - Seattle, ",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb3d0b06c1ba00c54db9bf?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "DetaPent",
+      "role": "Junior Data Analyst",
+      "location": "Atlanta, GA",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb2ac806c1ba00c54da316?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "The Walt Disney Company",
+      "role": "Associate Data Analyst",
+      "location": "New York, NY, USA",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb23e206c1ba00c54d9b75?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Syntax Data",
+      "role": "Qualitative Equity Research Analyst",
+      "location": "New York City",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb0a62569738374140ed2c?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Caterpillar Inc.",
+      "role": "Digital Data Analyst",
+      "location": "Chicago, IL",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb0946569738374140e6dd?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Farmers Insurance",
+      "role": "Associate Data Scientist",
+      "location": "United States",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bb0932569738374140e69e?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "State of Missouri",
+      "role": "Research Analyst Series",
+      "location": "Jefferson City, MO",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bafd4406c1ba00c54d4de8?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Lyft",
+      "role": "Data Analyst",
+      "location": "Toronto, ON",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69829b51348f733a5c3594c5?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Ipsos in US",
+      "role": "Data Scientist, Creative Excellence",
+      "location": "Culver City, CA",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69822f0ca314e76369058b4d?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist, Creative Excellence",
+      "location": "New York, NY",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/698241d20f6f7e7a2cdb6b00?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist, Creative Excellence",
+      "location": "Norwalk, CT",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/698243210f6f7e7a2cdb6c53?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist, Creative Excellence",
+      "location": "Chicago, IL",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69824914348f733a5c351616?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "San Francisco Campus for Jewish Living",
+      "role": "Clinical Data Analyst",
+      "location": "302 Silver Ave. San Francisco,",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69b0ba0a7495006450978f9a?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Office of the NYS Comptroller Thomas P. ",
+      "role": "Data Analyst 1 (SG-18), Data Analyst Trainee 2 (SG-16), Data",
+      "location": "Albany, NY",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69b4a5d606c1ba00c54620db?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Ipsos in US",
+      "role": "Data Scientist, Creative Excellence",
+      "location": "San Francisco, CA",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69823dfb0f6f7e7a2cdb67ca?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Ipsos in US",
+      "role": "Data Scientist, Creative Excellence",
+      "location": "Seattle, WA",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/6982353aa314e76369059bdb?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Caterpillar Inc.",
+      "role": "Digital Data Analyst",
+      "location": "Peoria, Illinois",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bae1bd3b74eb1e2c89166a?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Digital Data Analyst",
+      "location": "Westminster, Colorado",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bae1b906c1ba00c54d2b33?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Digital Data Analyst",
+      "location": "Chicago, Illinois",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bae1b9569738374140b26c?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Celestial Stars Arts Academy",
+      "role": "Data Analyst",
+      "location": "United States",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bd4e44b106024562823bb6?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "AEG",
+      "role": "LA Galaxy, Associate Data Scientist - Soccer Operations",
+      "location": "Carson, CA",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69a8bbbe7ac93962b708832e?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "McMaster-Carr",
+      "role": "Data Analyst",
+      "location": "Elmhurst, IL",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/6997723c81476f6176af9016?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "ForeFlight",
+      "role": "Aeronautical Data Analyst",
+      "location": "Colorado, United States",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bac52156973837414096d4?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Tactile Medical",
+      "role": "Data Analyst",
+      "location": "New Brighton, MN",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/699e3cb881476f6176b7210d?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "DISH TV",
+      "role": "Data Analyst",
+      "location": "Englewood, CO",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/6981710849964d25b5e46ade?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Quantifind",
+      "role": "Associate Data Scientist",
+      "location": "Washington, DC",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/6982c8e98232105a2d0b2636?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Oscar Health",
+      "role": "Data Scientist I",
+      "location": "Los Angeles, CA",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69ba8f333b74eb1e2c88890d?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist I",
+      "location": "Phoenix, AZ",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69ba905406c1ba00c54cab37?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "\u21b3",
+      "role": "Data Scientist I",
+      "location": "New York, NY",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69ba8f3f3b74eb1e2c888939?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "HR&A Advisors",
+      "role": "Research Analyst, Real Estate",
+      "location": "Atlanta, GA",
+      "date": "Mar 18",
+      "link": "https://jobright.ai/jobs/info/69bd094945e08b3dc1fa16a1?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Booz Allen Hamilton",
+      "role": "Data Scientist",
+      "location": "McLean, VA",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69a40a1cb600907a962a16ef?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Career Connection Network",
+      "role": "Data Analyst",
+      "location": "Buffalo, NY",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69ba976506c1ba00c54cbbf7?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Cushman & Wakefield",
+      "role": "Research Analyst",
+      "location": "Nashville, TN",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/699d1039e0bddb6acacc2c7b?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Ipsos in US",
+      "role": "Data Scientist, Creative Excellence",
+      "location": "Cincinnati, OH",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/698241d4a314e7636905a6d6?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "AT&T",
+      "role": "Cybersecurity Data Analyst (Government)",
+      "location": "Washington, DC",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69bb8aba06c1ba00c54e0be4?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "AT&T",
+      "role": "Cybersecurity Data Analyst (Government)",
+      "location": "Chantilly, VA",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69ba8e645697383741403a46?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "DHL Supply Chain",
+      "role": "Business Data Analyst II",
+      "location": "Salisbury, NC",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69be12d4b106024562837601?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Microsoft",
+      "role": "Data Scientist, Security",
+      "location": "United States",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69b79e5406c1ba00c54955ed?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "NRC Health",
+      "role": "Research Analyst",
+      "location": "Lincoln, Nebraska Metropolitan",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69ba892d5697383741401fe7?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "MSP Corp Prairies",
+      "role": "Data Analyst - Customer Insights",
+      "location": "Montr\u00e9al, QC, CA",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69b98ecb06c1ba00c54b95f1?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Booz Allen Hamilton",
+      "role": "Data Scientist",
+      "location": "Chantilly, VA",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69a3a6cfb600907a9629aed0?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Tesla",
+      "role": "Analytics Engineer, Demand Planning",
+      "location": "Fremont, CA",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69bbbe463b74eb1e2c8a37d4?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Prizeout",
+      "role": "Data Analyst",
+      "location": "New York, NY",
+      "date": "Mar 17",
+      "link": "https://jobright.ai/jobs/info/69bbbbf706c1ba00c54e4dc6?utm_campaign=Data%20Analysis&utm_source=1103",
+      "source": "jobright \u00b7 Data/ML New Grad 2026"
+    },
+    {
+      "company": "Meta",
+      "role": "Research Scientist Intern - Applied Vision in Augmented Real",
+      "location": "Redmond, WA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Meta",
+      "role": "Research Scientist Intern - Human Sensing and Wearable Fit M",
+      "location": "Redmond, WA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Meta",
+      "role": "Research Scientist Intern - Optimization - Privacy and Infer",
+      "location": "Menlo Park, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Salesforce",
+      "role": "Summer 2026 Intern - Applied Scientist - Optimization",
+      "location": "Massachusetts Boston",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Airbnb",
+      "role": "Machine Learning Engineering Intern - PhD",
+      "location": "United States",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Meta",
+      "role": "Research Scientist Intern - PyTorch On-Device - PhD",
+      "location": "Bellevue, WA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Meta",
+      "role": "Research Scientist Intern - MSL Infra Kernels & Optimization",
+      "location": "Menlo Park, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Meta",
+      "role": "Research Scientist Intern - PyTorch Distributed - PhD",
+      "location": "Menlo Park, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Roblox",
+      "role": "2026 Data Scientist - PhD Intern - Short Term",
+      "location": "San Mateo, CA, United States",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Meta",
+      "role": "Research Scientist Intern - AI Research - World Models - PhD",
+      "location": "Menlo Park, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Uber",
+      "role": "2026 PhD Software Engineer Intern - Machine Learning - Unite",
+      "location": "Sunnyvale, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Uber",
+      "role": "2026 PhD Applied Scientist Intern - Core Services Science St",
+      "location": "San Francisco, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Citadel Securities",
+      "role": "Quantitative Research Analyst Intern - BS/MS - US",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Citadel Securities",
+      "role": "Machine Learning Researcher - PhD Intern - US",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Citadel Securities",
+      "role": "Quantitative Researcher - PhD Intern - US",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Citadel",
+      "role": "Quantitative Research Analyst Intern - BS/MS - US",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Citadel",
+      "role": "Machine Learning Researcher - PhD Intern - US",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Citadel",
+      "role": "Quantitative Researcher - PhD Intern - US",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Citadel",
+      "role": "Quantitative Research Engineer - PhD Intern - US",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Five Rings",
+      "role": "Winter Intern 2027 - Quantitative Trader",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "City of Philadelphia",
+      "role": "Data Analyst Intern",
+      "location": "Philadelphia, PA, us",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Cognitiv",
+      "role": "Machine Learning Engineer Intern - Summer 2026",
+      "location": "Bellevue, WA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "LMI Innovation",
+      "role": "Data Scientist Intern - Passport Demand Forecasting - Summer",
+      "location": "US VA Tysons",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Littelfuse",
+      "role": "AI Engineering Intern",
+      "location": "Chicago",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Littelfuse",
+      "role": "AI Engineering Intern",
+      "location": "Chicago",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Zello",
+      "role": "AI & ML Engineering Intern",
+      "location": "Austin, Texas",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "GDIT",
+      "role": "Artificial Intelligence/Machine Learning Associate Intern",
+      "location": "USA VA Springfield",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "GDIT",
+      "role": "Data Scientist/Artificial Intelligence Engineer Associate In",
+      "location": "USA VA Springfield",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Howden Group Holdings",
+      "role": "Data Analyst Intern",
+      "location": "San Diego",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "GoodRx",
+      "role": "Data Scientist Intern",
+      "location": "NY Office",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "T-Mobile",
+      "role": "Summer 2026 Data Analyst Internship",
+      "location": "Bellevue, Washington",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Talkspace",
+      "role": "NLP Research Intern",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "iManage",
+      "role": "NLP Data Engineering Intern",
+      "location": "Chicago, IL, United States",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Tahoe Therapeutics",
+      "role": "Machine Learning Research Intern - Summer 2026",
+      "location": "South San Francisco",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Walt Disney",
+      "role": "Continuous Improvement Data Analyst Intern - Summer 2026",
+      "location": "USA CA S Flower St",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Walt Disney",
+      "role": "Continuous Improvement Data Analyst Intern - Summer 2026",
+      "location": "USA CA S Flower St",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "FRONTIER TECHNOLOGY",
+      "role": "AI/ML Engineering Internship",
+      "location": "US FL Orlando",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Bio-Rad Laboratories",
+      "role": "Data Scientist Intern",
+      "location": "Irvine, California, United Sta",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Bosch",
+      "role": "Artificial Intelligence / Machine Learning: Foundation Model",
+      "location": "Sunnyvale, CA, us",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "CACI",
+      "role": "Data Analyst / BI Developer Intern - Summer 2026",
+      "location": "CHANTILLY VA COMMONWEALTH BUIL",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "CCC Intelligent Solutions",
+      "role": "Machine Learning - Annotation and Gen AI Analyst Intern",
+      "location": "Chicago Green St , IL",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Waterworth",
+      "role": "Junior Data Analyst Co-op",
+      "location": "Victoria, British Columbia, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "DH Pace",
+      "role": "Data Analyst Summer Internship 2026! Full-time and paid!",
+      "location": "Olathe KS",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Guidewire",
+      "role": "AI Engineering Intern",
+      "location": "United States Philadelphia, PA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "EVRAZ",
+      "role": "Inventory Data Analyst Intern",
+      "location": "Pueblo, CO, USA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Ensono",
+      "role": "AI Data Scientist Intern",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Ensono",
+      "role": "Project Portfolio Data Analyst Intern",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Ensono",
+      "role": "Intern - Capacity Management Data Analyst",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Veolia",
+      "role": "AI Engineering Intern - LLM",
+      "location": "Paramus, NJ, us",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Veolia",
+      "role": "AI Engineering Intern - SLM",
+      "location": "Paramus, NJ, us",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "GTS",
+      "role": "Quantitative Trading Intern - Summer 2027 Internship",
+      "location": "US NY New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "GTS",
+      "role": "Quantitative Trading Intern - Fall 2026 Internship",
+      "location": "US NY New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Kodiak Robotics",
+      "role": "Fall 2026 Intern - Artificial Intelligence/Machine Learning",
+      "location": "Mountain View, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Bosch",
+      "role": "Foundation Models for Autonomous Driving - AI Engineering In",
+      "location": "Sunnyvale, CA, us",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Profluent",
+      "role": "Machine Learning Research Intern",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Fidelity Investments",
+      "role": "Co-op - Machine Learning",
+      "location": "Summer St, Boston MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "HRL Laboratories",
+      "role": "Graph Machine Learning Research Intern",
+      "location": "Calabasas, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "iManage",
+      "role": "Machine Learning Intern",
+      "location": "Chicago, IL, United States",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "EVRAZ",
+      "role": "Inventory Data Analyst Intern",
+      "location": "Pueblo, CO, USA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Scout Motors",
+      "role": "Intern - Information Technology - AI Engineer",
+      "location": "Charlotte, NC United States",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Scout Motors",
+      "role": "Intern - Information Technology - AI Engineer",
+      "location": "Charlotte, NC United States",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "General Motors",
+      "role": "2026 Summer Intern - Machine Learning Engineer - Trajectory ",
+      "location": "Sunnyvale, California, United ",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Generate Biomedicines",
+      "role": "Machine Learning Intern",
+      "location": "Somerville, MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "KBR",
+      "role": "National Security Solutions - NSS Internship - AI Engineer I",
+      "location": "El Segundo, California",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Cypress Creek Renewables",
+      "role": "Quantitative Development Intern",
+      "location": "CCR s office locations, includ",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Cypress Creek Renewables",
+      "role": "Summer Intern - Quantitative Analytics",
+      "location": "CCR s office locations, includ",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Wasabi",
+      "role": "Co-op - AI / Machine Learning Engineering",
+      "location": "United States of America",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Cypress Creek Renewables",
+      "role": "ML Engineering Intern",
+      "location": "CCR s office locations, includ",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Fidelity Investments",
+      "role": "Co-Op - Risk Data Analyst",
+      "location": "Summer St, Boston MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Berkshire Hathaway GUARD Insurance Compa",
+      "role": "Data-AI Engineering Intern",
+      "location": "US NY New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Fidelity Investments",
+      "role": "Co-Op - Data Analyst",
+      "location": "Summer St, Boston MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Handshake",
+      "role": "Machine Learning Engineer - PhD Intern",
+      "location": "San Francisco, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Fidelity Investments",
+      "role": "Co-op - Quantitative Analyst",
+      "location": "Summer St, Boston MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "G2",
+      "role": "GTM AI Engineering Intern",
+      "location": "Chicago",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "SWBC",
+      "role": "AI Data Engineering Intern",
+      "location": "San Antonio, TX",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Handshake",
+      "role": "AI/Machine Learning Engineer Intern",
+      "location": "San Francisco, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Heirloom Carbon",
+      "role": "Research Scientist Intern",
+      "location": "Brisbane, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Kensho",
+      "role": "Research Scientist - Summer Intern 2026",
+      "location": "US NY NYC WATER ST HRS",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "webAI",
+      "role": "Summer Internship - Machine Learning Engineer",
+      "location": "Austin, TX",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Stand Together",
+      "role": "KIP Summer 2026 - Policy Data Analyst Intern - Empire Center",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "insitro",
+      "role": "Machine Learning Intern",
+      "location": "South San Francisco, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "First American",
+      "role": "Data Scientist Intern - REMOTE",
+      "location": "USA, California, Santa Ana",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Okta",
+      "role": "Data Analyst Intern - Summer 2026",
+      "location": "San Francisco, California",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Toyota Research Institute",
+      "role": "Human-Centered AI Intern - CAD Design Reasoning Machine Lear",
+      "location": "Los Altos, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "AM Best Company",
+      "role": "2026 Summer Intern - Credit Rating Criteria - Quantitative A",
+      "location": "US NJ Oldwick",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Hayward Industries",
+      "role": "ERP Dashboard and Data Analyst Intern",
+      "location": "US RI N Kingstown",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Bloom Energy",
+      "role": "Machine Learning/Data Science Intern",
+      "location": "San Jose, California",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Magna",
+      "role": "AI Engineering Co-op - 4 Months starting May",
+      "location": "Milton, Ontario, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "iMETALX",
+      "role": "Data Scientist Intern",
+      "location": "Colorado Springs, Colorado, US",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Applied Materials",
+      "role": "2026 Summer Data Analyst/Scientist Intern- Master's - Santa ",
+      "location": "Santa Clara,CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Root Access",
+      "role": "Machine Learning Engineer -- Intern",
+      "location": "New York City",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Sanctuary AI",
+      "role": "Machine Learning Research Intern - Reinforcement/Imitation L",
+      "location": "Vancouver, BC",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Upstart",
+      "role": "Research Scientist Intern",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Bio-Techne",
+      "role": "Graduate Data Analyst Intern- Operations & Supply Chain",
+      "location": "Minneapolis, MN",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Littelfuse",
+      "role": "Data Analyst Intern - Electrical Industrial Infrastructure",
+      "location": "Chicago",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "ConnectPrep",
+      "role": "Data Analyst Internship",
+      "location": "Boston, Massachusetts, US",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Impinj",
+      "role": "Platform Engineering Machine Learning Intern",
+      "location": "Seattle, Washington, United St",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Alo Yoga",
+      "role": "Data Analyst Intern",
+      "location": "Beverly Hills, California, Uni",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Bloom Energy",
+      "role": "Machine Learning / Data Science Intern",
+      "location": "San Jose, California",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "ResMed",
+      "role": "AI Engineer Intern",
+      "location": "San Diego, CA, United States",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Alo Yoga",
+      "role": "Data Analyst Intern",
+      "location": "Beverly Hills, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Avathon",
+      "role": "Data Scientist Intern",
+      "location": "Pleasanton, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Berkley Insurance",
+      "role": "Business and Data Analyst Intern",
+      "location": "West Hartford, CT",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Sony",
+      "role": "Sony Research - Internship on Audio Processing and Machine L",
+      "location": "New York",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Parspec",
+      "role": "Applied AI Engineer Intern",
+      "location": "San Mateo, California",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "d-Matrix",
+      "role": "Machine Learning Intern - Dynamic KV-Cache Modeling for Effi",
+      "location": "Santa Clara",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Nissan",
+      "role": "Machine Learning Research Intern - Prediction and Planning -",
+      "location": "Santa Clara, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "MORSE Corp Co-op Opportunities",
+      "role": "Data Scientist Co-op",
+      "location": "Cambridge, MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "d-Matrix",
+      "role": "Machine Learning Research Intern",
+      "location": "Santa Clara",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Wealth.com",
+      "role": "Applied Scientist- AI/ML Intern",
+      "location": "Remote, OR",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Woven by Toyota",
+      "role": "Machine Learning Engineer - Behavior - Internship",
+      "location": "Palo Alto, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Woven by Toyota",
+      "role": "Data Scientist - Ego and Ado Decision - Internship",
+      "location": "Ann Arbor, MI",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "FRONTIER TECHNOLOGY",
+      "role": "AI/ML Engineering Internship",
+      "location": "Golden, CO",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Apriori Bio",
+      "role": "AI Research Scientist Intern - Summer 2026",
+      "location": "Cambridge, MA USA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Copeland",
+      "role": "2026 Data Analyst Intern",
+      "location": "St. Louis, MO",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "KLA",
+      "role": "Algorithms/Machine Learning Engineering Intern - Multi-Modal",
+      "location": "Milpitas, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "KLA",
+      "role": "Algorithms/Machine Learning Engineering Intern - Multi-Modal",
+      "location": "Milpitas, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "General Motors",
+      "role": "2026 Summer Intern - Machine Learning Systems Engineer - Aut",
+      "location": "GM Automation Sunnyvale GM Aut",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Marvell",
+      "role": "Applied Machine Learning Scientist Intern - PhD",
+      "location": "Santa Clara, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "PwC",
+      "role": "Risk Services - AI Factory Data Scientist Internship - Jan -",
+      "location": "Singapore Marina One",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Sierra Nevada Corporation",
+      "role": "Data Scientist Intern - Summer 2026",
+      "location": "Sparks, NV",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Thomson Reuters",
+      "role": "Applied Scientist Intern - 2026",
+      "location": "United States of America, Eaga",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Zillow",
+      "role": "AI Applied Scientist - PhD Intern - Foundational IQ",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Zillow",
+      "role": "AI Applied Scientist - PhD Intern - Next-Gen Agentic and Mul",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Zillow",
+      "role": "AI Applied Scientist - PhD Intern - Foundational AQ & EQ",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Zillow",
+      "role": "AI Applied Scientist - PhD Intern - Evaluation Systems and M",
+      "location": "Remote",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Audax Group",
+      "role": "Data Analyst - Business Development Co-Op",
+      "location": "Boston, MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Viant Technology",
+      "role": "Machine Learning Engineering Internship - Summer 2026",
+      "location": "Irvine, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Meshy",
+      "role": "Machine Learning Systems Intern",
+      "location": "Sunnyvale",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "LMI Innovation",
+      "role": "AI Engineer Intern - USPS - Summer 2026",
+      "location": "Tysons, VA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Workato",
+      "role": "Intern - AI Engineering",
+      "location": "San Francisco, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Woven by Toyota",
+      "role": "Machine Learning Intern - Autolabeling",
+      "location": "Palo Alto, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Woven by Toyota",
+      "role": "Machine Learning Intern - Vehicle Perception",
+      "location": "Palo Alto, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Karyopharm",
+      "role": "Summer Intern - Analytical Data Analyst",
+      "location": "Newton, MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Kirin",
+      "role": "Quantitative Research Intern - Prediction Markets",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Xometry",
+      "role": "Machine Learning Intern",
+      "location": "North Bethesda, MD",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Xometry",
+      "role": "Machine Learning Intern",
+      "location": "Waltham, MA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Philips",
+      "role": "PhD. Co-op - AI Research / Generative AI Engineer - Orlando ",
+      "location": "Orlando, FL",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Modernizing Medicine",
+      "role": "Product Development Intern - AI & ML Engineering",
+      "location": "Boca Raton, FL",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "XPENG",
+      "role": "Research Scientist Intern",
+      "location": "Santa Clara, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Virtue AI",
+      "role": "Member of Technical Staff - Research Scientist Intern",
+      "location": "San Francisco, CA",
+      "date": "?",
+      "link": "",
+      "source": "speedyapply \u00b7 AI/ML New Grad 2026"
+    },
+    {
+      "company": "Two Sigma Investments, LLC.",
+      "role": "Data Scientist - Internship [Summer 2026] | New York, NY, US",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Capital One",
+      "role": "Manager, Data Scientist - Emerging Payments & Airkey",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Capitalone",
+      "role": "Current PhD - Data Science Internship - Summer 2026",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "The Walt Disney Company",
+      "role": "Data Science Intern, Summer 2026",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Capital One",
+      "role": "Manager, Data Scientist - Recommendation & Personalization S",
+      "location": "New York, NY (+2 others)",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "New York University",
+      "role": "[EOI] [SPRING 2026] Assistant Research Scientist | Center fo",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Capital One",
+      "role": "Director, Data Scientist - External Data Strategy",
+      "location": "New York, NY (+1 other)",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "PulseRise Technologies",
+      "role": "Data Scientist (Fintech / Onchain Analytics)",
+      "location": "New York, NY",
+      "date": "15 days ago",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Capital One",
+      "role": "Manager, Data Scientist",
+      "location": "New York, NY (+2 others)",
+      "date": "11 days ago",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "The Walt Disney Company",
+      "role": "Disney Ad Sales, Graduate Data Science Engineering Intern, S",
+      "location": "New York, NY (+1 other)",
+      "date": "26 days ago",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Bank of America",
+      "role": "Global Quantitative Data Analytics Summer 2026 Analyst \u2013 Con",
+      "location": "Charlotte, NC",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "T Rowe Price",
+      "role": "2026 Quantitative Investing Internship Program",
+      "location": "Baltimore, MD",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Berkley",
+      "role": "Quantitative Analyst Intern - Summer 2026",
+      "location": "Manassas, VA",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "W.R. Berkley",
+      "role": "Quantitative Analyst Intern, Summer 2026",
+      "location": "Manassas, VA",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Capital One",
+      "role": "Senior AI Engineer",
+      "location": "San Jose, CA (+4 others)",
+      "date": "27 days ago",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Sonauto",
+      "role": "ML Engineer/Researcher",
+      "location": "San Francisco, CA",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Various Employers",
+      "role": "Machine Learning Engineer",
+      "location": "Santa Cruz, CA",
+      "date": "3 days ago",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "roblox",
+      "role": "[2026] Senior Machine Learning Engineer, Multimodal AI, Comp",
+      "location": "San Mateo, CA",
+      "date": "24 days ago",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs, Inc.",
+      "role": "2026 | Americas | New York | Asset Management, Quantitative ",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs",
+      "role": "2026 | Americas | New York | Asset Management, Quantitative ",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs Group, Inc.",
+      "role": "2026 | Americas | New York City Area | Wealth Management, Qu",
+      "location": "United States",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs",
+      "role": "2026 | Americas | New York City Area | Asset and Wealth Mana",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs",
+      "role": "2026  Americas  New York City Area  FICC and Equities (Sales",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs, Inc.",
+      "role": "2026 | Americas | New York City Area | FICC and Equities (Sa",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs USA",
+      "role": "Finance and Risk Quantitative Strats | Summer Associate",
+      "location": "New York, NY",
+      "date": "3 days ago",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs",
+      "role": "2026 | Americas | Dallas Metro Area | Finance and Risk Quant",
+      "location": "Dallas, TX",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Goldman Sachs, Inc.",
+      "role": "2026 | Americas | Salt Lake City | FICC and Equities (Sales ",
+      "location": "Salt Lake City, UT",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Two Sigma Investments, LLC.",
+      "role": "Data Scientist - Internship [Summer 2026] | New York, NY, US",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    },
+    {
+      "company": "Two Sigma",
+      "role": "Two Sigma Internship",
+      "location": "New York, NY",
+      "date": "?",
+      "link": "",
+      "source": "Google Jobs"
+    }
+  ]
+}

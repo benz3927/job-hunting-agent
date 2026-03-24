@@ -1,64 +1,99 @@
 # ── Job Hunting Agent — Candidate Profile ────────────────────────────────────
-# Fill this in before running job_agent.py
 
 name: Benjamin Zhao
+email: bzhao@hamilton.edu
+phone: 609-356-2186
+linkedin: linkedin.com/in/benz3927
+github: github.com/benz3927
+
 education:
-  degree: BS, Mathematics & Economics (double major)
+  degree: BA, Mathematics & Economics (double major)
   school: Hamilton College
+  location: Clinton, NY
   gpa: 3.71
   graduation: May 2026
+  coursework:
+    - Real Analysis
+    - Seminar in Applied Probability
+    - Probability and Statistical Inference
+    - Deep Learning
+    - Data Structures and Algorithms
+    - Spacetime and Quantum World
+    - Econometrics
+    - Financial Economics
 
 skills:
-  languages: [Python, R, bash, SQL]
-  ml_frameworks: [PyTorch, scikit-learn, HuggingFace Transformers]
+  languages: [Python, R, SQL, C++, Stata, MATLAB, bash/UNIX]
+  ml_frameworks: [PyTorch, TensorFlow, scikit-learn, HuggingFace Transformers]
   llm_tools: [LangChain, OpenAI API, Anthropic API, Gradio]
   data: [pandas, NumPy, matplotlib, seaborn]
-  other: [SLURM, Git, Linux, Pydantic, vector databases]
+  cloud: [AWS (S3, EC2, Athena), Microsoft Azure]
+  other: [SLURM, Git, GitHub, Linux, Pydantic, vector databases, Microsoft Office]
+
+projects:
+  - name: Job Hunting Agent (Agentic AI App)
+    bullets:
+      - Built an agentic job-hunting system using Anthropic SDK native tool use with 5 registered tools — job search (SerpAPI), ATS job fetching (Greenhouse/Lever APIs), fit scoring, resume tailoring, and application tracking
+      - Deployed as a Gradio web app; agent loop handles tool routing, execution, and multi-turn memory via sliding window history
+
+  - name: FOMC Transcript Dissent Analysis (Honors Thesis)
+    dates: Jan 2026 – Present
+    bullets:
+      - Built GPT-4o few-shot scoring pipeline to quantify dissent in FOMC transcripts; found speech-based scores detect regional unemployment effects more than binary dissent votes
+      - Validated with Claude Sonnet robustness check (r=0.838 with GPT v8 scores)
+
+  - name: Protein Quality Estimation Research (DProQV2)
+    org: Hamilton College CS Research Assistant — Prof. Shawn Chen
+    dates: Jan 2026 – Present
+    bullets:
+      - Built DProQV2, a 12-layer GATv2 GNN (42.6M params) with gated attention (RMSNorm + SwiGLU) combining ESM3 embeddings with Rosetta energies, SASA/DSSP, and Voronoi features to predict lDDT for 1M+ protein decoys
+      - Scaled training across 20 parallel SLURM jobs on NVIDIA H200 GPU cluster with sequence-identity-based splits to prevent data leakage; achieved val_pearson_global ~0.894
+
+  - name: HamPlan RAG System
+    dates: Nov 2025 – Dec 2025
+    bullets:
+      - Built RAG-powered course recommendation system using OpenAI API and 951 embeddings (courses, syllabi, department overviews)
+      - Deployed as web app at hamiltoncourses.com; presented to faculty with 3.8/5 satisfaction rating
+
+  - name: Medical Necessity Policy Extractor
+    dates: Dec 2024
+    bullets:
+      - Built a Python workflow using Pydantic, LangChain, and GPT-4 to automate extraction of procedure and diagnosis codes from medical policy documents
+      - Deployed as an interactive Gradio app on Hugging Face
 
 experience:
-  - title: Research Assistant (ML/Bioinformatics)
-    org: Hamilton College — Prof. Shawn Chen
-    dates: 2024–present
-    bullets:
-      - Built DProQV2, a 12-layer GATv2 GNN (42.6M params) for protein complex quality assessment
-      - Integrated ESM3 protein language model embeddings; achieved 100% residue coverage across 2141 targets
-      - Implemented Qwen3-style gated attention (RMSNorm + SwiGLU); reached val_pearson_global ~0.878
-      - Ran ~1M samples across 20 parallel SLURM jobs; debugged PyRosetta EnergyGraph API
-
-  - title: Research Assistant (NLP/Economics)
-    org: Hamilton College — Prof. Ann Owen
-    dates: 2024–present
-    bullets:
-      - Honors thesis on FOMC transcript analysis using GPT-4o few-shot scoring
-      - Core finding — speech dissent scores outperform binary votes for detecting regional unemployment effects
-      - Built RAG system (HamPlan) with 951 embeddings for course recommendations; deployed at hamiltoncourses.com
-      - Ran Claude Sonnet as robustness check (r=0.838 with GPT v8 scores)
-
-  - title: Healthcare AI Intern (prior)
-    org: "[fill in]"
-    dates: "[fill in]"
-    bullets:
-      - Medical policy extraction pipeline using LangChain + GPT-4 + Pydantic + Gradio
-      - Healthcare provider entity matching
-
-  - title: Tutor, Quantitative & Symbolic Reasoning Center
+  - title: Economics Summer Research Assistant
     org: Hamilton College
-    dates: 2023–present
+    dates: May 2025 – Jun 2025
+    bullets:
+      - Built database of international trade and aid flows from UN Comtrade, IMF, and World Bank using automated data pipelines
+      - Processed multi-source economic data to support quantitative analysis for Hamilton seniors' theses on trade policy
+
+  - title: Economics Tutor, QSR Center
+    org: Hamilton College
+    dates: Aug 2024 – May 2025
+    bullets:
+      - Tutored economics students individually and in groups, helping them apply economic models and mathematical reasoning
 
 awards:
-  - 2nd place nationally, ASA Undergraduate Statistics Project Competition (autism screening, Random Forest)
+  - "2nd place nationally, ASA Undergraduate Statistics Project Competition (autism screening analysis, Random Forest) — Mar 2023"
 
 target_roles:
   - Applied AI Engineer
   - ML Engineer
   - AI/ML Research Engineer
   - Data Scientist (ML-focused)
+  - Data Engineer
+  - NLP Engineer
+  - Quantitative Analyst / Researcher
+  - Research Scientist
 
 target_locations:
   - Remote
   - New York, NY
   - Boston, MA
-  - Seattle, WA  # willing to relocate
+  - Seattle, WA
+  - San Francisco, CA
 
 target_industries:
   - Biotech / pharma AI
@@ -70,7 +105,31 @@ target_industries:
 salary_target_usd: 95000
 
 resume_summary: >
-  Hamilton senior (Math + Econ) with hands-on ML engineering experience spanning
-  GNN-based protein structure modeling, LLM-powered NLP pipelines, and RAG system
-  deployment. Comfortable with the full stack from SLURM cluster training to
-  production-facing Gradio apps. Bilingual English/Chinese.
+  Hamilton senior (Math + Econ, GPA 3.71) with hands-on ML engineering experience spanning
+  GNN-based protein structure modeling, LLM-powered NLP pipelines, and RAG system deployment.
+  Comfortable with the full stack from SLURM cluster training to production-facing web apps.
+  National ASA competition award winner. Bilingual English/Chinese.
+
+cover_letter_sample: >
+  Dear Hiring Manager,
+
+  I am applying for the AI Engineer role on Point72's Portfolio Construction & Analytics Team.
+  As a Mathematics and Economics senior at Hamilton College graduating in May 2026, I have spent
+  the past year building and deploying AI systems — RAG pipelines, agentic workflows, and
+  LLM-powered tools — and I am eager to bring that to a team applying these technologies to
+  real investment problems.
+
+  My most relevant project is a job-hunting agent built with Anthropic's SDK, featuring five
+  registered tools (job search, ATS fetching, fit scoring, resume tailoring, and application
+  tracking), multi-turn memory via a sliding window, and a Gradio front end. I have built similar
+  systems in other contexts: HamPlan, a RAG-powered course recommendation tool using OpenAI and
+  951 embeddings, deployed as a web app and presented to faculty; and a medical policy extractor
+  using LangChain, Pydantic, and GPT-4 to automate code extraction from clinical documents.
+
+  My FOMC transcript thesis adds a finance-specific angle — I built a GPT-4o few-shot scoring
+  pipeline to quantify dissent in Fed transcripts and found speech-based scores detect regional
+  unemployment effects with greater statistical power than binary votes. Working on that project
+  made me genuinely curious about how language carries signal in financial contexts.
+
+  Thank you for your consideration.
+  Sincerely, Benjamin Zhao
