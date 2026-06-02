@@ -87,11 +87,27 @@ def _location_score(location: str) -> int:
 
 
 def _program_bonus(role: str) -> int:
+    """Reward structured early-career programs. These are a top priority, so the
+    bonus is large enough to lift a program role above a generic role even at an
+    unknown (Tier C) company."""
     r = role.lower()
-    prog = ("development program", "rotational program", "analyst program",
-            "associate program", "leadership development", "new grad program",
-            "early career")
-    return 15 if any(p in r for p in prog) else 0
+    # Strong, explicit development/rotational programs — the things to prioritize.
+    strong_prog = (
+        "development program", "rotational program", "rotational analyst",
+        "technical development", "technology development", "engineering development",
+        "accelerated development", "leadership development", "management development",
+        "rotation program", "rotational",
+    )
+    # Softer early-career signals.
+    soft_prog = (
+        "analyst program", "associate program", "new grad program", "graduate program",
+        "early career", "early careers", "emerging talent", "campus", "university grad",
+    )
+    if any(p in r for p in strong_prog):
+        return 30
+    if any(p in r for p in soft_prog):
+        return 18
+    return 0
 
 
 def _role_strength(role: str) -> int:

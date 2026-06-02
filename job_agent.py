@@ -240,13 +240,31 @@ def search_jobs(query: str) -> str:
         return f"Search failed: {e}"
 
 
+def _ats_url(slug, plat):
+    if plat == "greenhouse":
+        return f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true"
+    if plat == "lever":
+        return f"https://api.lever.co/v0/postings/{slug}?mode=json"
+    raise ValueError(f"Unknown platform '{plat}'")
+
+
+def _ats_normalize(data, plat, slug):
+    """Return a list of {title, location, link} from any supported ATS payload."""
+    if plat == "greenhouse":
+        return [{"title": j.get("title", ""),
+                 "location": j.get("location", {}).get("name", "N/A"),
+                 "link": j.get("absolute_url", "")} for j in data.get("jobs", [])]
+    if plat == "lever":
+        jobs = data if isinstance(data, list) else []
+        return [{"title": j.get("text", ""),
+                 "location": j.get("categories", {}).get("location", "N/A"),
+                 "link": j.get("hostedUrl", "")} for j in jobs]
+    return []
+
+
 def fetch_ats_jobs(company_slug: str, platform: str = "greenhouse") -> str:
     def _get(slug, plat):
-        url = (
-            f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true"
-            if plat == "greenhouse"
-            else f"https://api.lever.co/v0/postings/{slug}?mode=json"
-        )
+        url = _ats_url(slug, plat)
         return requests.get(url, timeout=15), url
 
     try:
@@ -262,8 +280,8 @@ def fetch_ats_jobs(company_slug: str, platform: str = "greenhouse") -> str:
                 return f"Slug '{company_slug}' not found on {platform}. Try '{other}'."
         r.raise_for_status()
         data = r.json()
-        jobs = data.get("jobs", []) if platform == "greenhouse" else (data if isinstance(data, list) else [])
-        if not jobs:
+        norm = _ats_normalize(data, platform, company_slug)
+        if not norm:
             return f"No open roles at {company_slug} on {platform}."
 
         keywords = [
@@ -280,18 +298,16 @@ def fetch_ats_jobs(company_slug: str, platform: str = "greenhouse") -> str:
             "rotational analyst", "software development program",
         ]
         relevant, all_roles = [], []
-        for j in jobs:
-            title    = j.get("title", "")
-            location = j.get("location", {}).get("name", "N/A") if platform == "greenhouse" else j.get("categories", {}).get("location", "N/A")
-            link     = j.get("absolute_url", "") if platform == "greenhouse" else j.get("hostedUrl", "")
-            entry    = f"- {title} | {location}\n  {link}"
+        for j in norm:
+            title    = j["title"]
+            entry    = f"- {title} | {j['location']}\n  {j['link']}"
             all_roles.append(entry)
             if any(k in title.lower() for k in keywords):
                 relevant.append(entry)
 
         if relevant:
-            return f"{company_slug} ({platform}) — {len(relevant)} relevant role(s):\n" + "\n".join(relevant)
-        return f"{company_slug} ({platform}) — no ML/data roles. All {len(all_roles)} open:\n" + "\n".join(all_roles[:15])
+            return f"{company_slug} ({platform}): {len(relevant)} relevant role(s):\n" + "\n".join(relevant)
+        return f"{company_slug} ({platform}): no ML/data roles. All {len(all_roles)} open:\n" + "\n".join(all_roles[:15])
     except Exception as e:
         return f"ATS fetch failed: {e}"
 
@@ -299,12 +315,7 @@ def fetch_ats_jobs(company_slug: str, platform: str = "greenhouse") -> str:
 def fetch_job_description(company_slug: str, role_query: str, platform: str = "greenhouse") -> str:
     try:
         def _get(slug, plat):
-            url = (
-                f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true"
-                if plat == "greenhouse"
-                else f"https://api.lever.co/v0/postings/{slug}?mode=json"
-            )
-            return requests.get(url, timeout=15)
+            return requests.get(_ats_url(slug, plat), timeout=15)
 
         r = _get(company_slug, platform)
         if r.status_code == 404:
@@ -318,20 +329,25 @@ def fetch_job_description(company_slug: str, role_query: str, platform: str = "g
                 return f"Slug '{company_slug}' not found. Try '{other}'."
         r.raise_for_status()
         data = r.json()
-        jobs = data.get("jobs", []) if platform == "greenhouse" else (data if isinstance(data, list) else [])
+
+        if platform == "greenhouse":
+            jobs = data.get("jobs", [])
+            key  = lambda j: j.get("title", "").lower()
+        else:
+            jobs = data if isinstance(data, list) else []
+            key  = lambda j: j.get("text", "").lower()
         if not jobs:
             return f"No open roles at {company_slug}."
 
         query_lower = role_query.lower()
         best, best_score = None, 0
         for j in jobs:
-            title = j.get("title", "").lower()
-            score = sum(1 for w in query_lower.split() if w in title)
+            score = sum(1 for w in query_lower.split() if w in key(j))
             if score > best_score:
                 best_score, best = score, j
 
         if not best or best_score == 0:
-            titles = [j.get("title", "?") for j in jobs[:10]]
+            titles = [(j.get("title") or j.get("text") or "?") for j in jobs[:10]]
             return "No close match. Available:\n" + "\n".join(f"- {t}" for t in titles)
 
         if platform == "greenhouse":
@@ -388,8 +404,10 @@ JOB: {title} at {company} ({location})
 
 Factor in BOTH role fit AND location quality. Remote/nearby = strong bonus.
 International is fine for excellent roles. Low livability cities = slight penalty.
-Development programs, rotational programs, and analyst programs at strong companies
-are highly desirable for a new grad — treat these as Strong if the company/industry fits.
+TOP PRIORITY: Federal Reserve and government research roles, and structured
+development programs (technical, technology, accelerated, leadership, rotational
+development programs) and analyst/associate programs at established companies.
+Treat these as Strong whenever the company or industry fits.
 Reply ONLY one word: Strong, Maybe, or Skip."""}]
         )
         text = resp.content[0].text.strip().lower()
@@ -494,6 +512,14 @@ JOB DESCRIPTION:
         return f"Tailoring failed: {e}"
 
 
+def _strip_em_dashes(text: str) -> str:
+    """Remove em/en dashes from generated prose (hard rule: no em-dashes)."""
+    text = text.replace(" — ", ", ").replace("—", ", ")   # em dash —
+    text = text.replace(" – ", ", ").replace("–", "-")     # en dash –
+    text = text.replace(" ― ", ", ").replace("―", ", ")   # horizontal bar ―
+    return text
+
+
 def generate_cover_letter(job_description: str, company: str, role: str) -> str:
     try:
         profile      = load_profile()
@@ -505,7 +531,8 @@ def generate_cover_letter(job_description: str, company: str, role: str) -> str:
 
 Rules:
 - 3 paragraphs max
-- DO NOT start with "I am excited to" — start with substance
+- NO EM-DASHES OR EN-DASHES anywhere. Use periods or commas instead. This is a hard rule.
+- DO NOT start with "I am excited to". Start with substance.
 - Opening: lead with who the candidate is and why THIS company/role specifically
 - Middle: 2-3 most relevant projects/experiences with concrete details and numbers
 - Closing: one specific sentence referencing what the company does, then sign off
@@ -517,7 +544,7 @@ Rules:
 CANDIDATE PROFILE:
 {yaml.dump(profile, default_flow_style=False)}
 
-STYLE REFERENCE — match this tone, structure, and specificity exactly:
+STYLE REFERENCE. Match this tone, structure, and specificity exactly:
 {style_sample}
 
 COMPANY: {company}
@@ -527,7 +554,7 @@ JOB DESCRIPTION:
 {job_description[:3000]}
 """}]
         )
-        return resp.content[0].text
+        return _strip_em_dashes(resp.content[0].text)
     except Exception as e:
         return f"Cover letter generation failed: {e}"
 
