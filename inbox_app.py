@@ -128,6 +128,22 @@ PROGRAM_SIGNALS = {
     "analyst development program", "software development program",
 }
 
+# Broad matcher for the dedicated "Programs" tab. Surfaces structured
+# development / rotational / early-career programs across ALL company tiers
+# (not just Tier B), since most of these sit at Tier C companies.
+PROGRAM_TAB_SIGNALS = (
+    "development program", "rotational program", "rotational analyst",
+    "rotation program", "rotational", "technical development",
+    "technology development", "engineering development", "accelerated development",
+    "leadership development", "management development", "analyst development",
+    "analyst program", "associate program", "graduate program",
+    "new grad program", "early career", "early careers", "emerging talent",
+)
+
+def is_program_role(role: str) -> bool:
+    r = (role or "").lower()
+    return any(s in r for s in PROGRAM_TAB_SIGNALS)
+
 PHD_SIGNALS = {
     " phd", "ph.d", "phd intern", "phd student", "doctoral", "postdoc",
     "post-doc", "post doc", "- phd", "(phd)", "/ phd",
@@ -343,7 +359,7 @@ def save_inbox(jobs): INBOX_PATH.write_text(json.dumps(jobs, indent=2))
 
 def inbox_stats(jobs):
     counts = {"new":0,"approved":0,"skipped":0,"pending":0,"strong":0,"maybe":0,
-              "daily":0,"tight":0,"rest":0}
+              "daily":0,"tight":0,"rest":0,"programs":0}
     new_jobs = [j for j in jobs if j.get("status") == "new"]
     for j in jobs:
         s = j.get("status","new")
@@ -357,6 +373,7 @@ def inbox_stats(jobs):
     counts["daily"] = len(view["daily"])
     counts["tight"] = len(view["tight"])
     counts["rest"]  = len(view["rest"])
+    counts["programs"] = sum(1 for j in new_jobs if is_program_role(j.get("role","")))
     return counts
 
 def _exists(inbox, company, role):
@@ -817,6 +834,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
   <div class="tab {{ 'active' if tab=='daily' }}"  onclick="setTab('daily')" style="color:#7c3aed">🔥 Daily Watch ({{ stats.daily }})</div>
   <div class="tab {{ 'active' if tab=='tight' }}"  onclick="setTab('tight')" style="color:#15803d">⭐ Top {{ tight_limit }} ({{ stats.tight }})</div>
   <div class="tab {{ 'active' if tab=='rest' }}"   onclick="setTab('rest')">📂 Everything ({{ stats.rest }})</div>
+  <div class="tab {{ 'active' if tab=='programs' }}" onclick="setTab('programs')" style="color:#b45309">🎓 Programs ({{ stats.programs }})</div>
   <div class="tab-sep"></div>
   <div class="tab {{ 'active' if tab=='strong' }}" onclick="setTab('strong')">🟢 Strong ({{ stats.strong }})</div>
   <div class="tab {{ 'active' if tab=='maybe' }}"  onclick="setTab('maybe')">🟡 Maybe ({{ stats.maybe }})</div>
@@ -831,6 +849,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
   Showing <b>{{ jobs|length }}</b> job{{ 's' if jobs|length != 1 }}
   {% if tab == 'daily' %} · <b>🔥 always-watch targets</b>
   {% elif tab == 'tight' %} · <b>⭐ your best matches</b>
+  {% elif tab == 'programs' %} · <b>🎓 development &amp; rotational programs (all tiers)</b>
   {% elif tab == 'rest' %} · <b>📂 the long tail</b>{% endif %}
   {% if days != 'all' %} · <b>past {{ days }} days</b>{% endif %}
   {% if loc_filter == 'remote' %} · <b>🏠 remote only</b>
@@ -1110,6 +1129,11 @@ def index():
     if tab in ("daily", "tight", "rest"):
         view = tier_jobs(new_jobs, tight_limit=TIGHT_LIMIT)
         jobs = view[tab]
+    elif tab == "programs":
+        for j in new_jobs:
+            score_and_tier(j)   # ensure tier_score is current
+        jobs = sorted([j for j in new_jobs if is_program_role(j.get("role",""))],
+                      key=lambda x: -x.get("tier_score", 0))
     elif tab == "strong":
         jobs = sorted([j for j in new_jobs if j.get("triage")=="Strong"],
                       key=lambda x: -x.get("tier_score", 0))
