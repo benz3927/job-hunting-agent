@@ -33,7 +33,22 @@ ANTHROPIC_API_KEY=your_key
 SERPAPI_API_KEY=your_key   # free tier at serpapi.com (100 searches/month)
 ```
 
-Edit `profile.yaml` with your experience, then run:
+### Build your profile from a resume PDF
+
+Instead of editing `profile.yaml` by hand, drop in any resume PDF and generate it:
+
+```bash
+python build_profile.py resume.pdf              # overwrites profile.yaml
+python build_profile.py resume.pdf -o me.yaml   # custom output
+python build_profile.py resume.pdf --print      # preview without writing
+```
+
+The PDF is sent natively to Claude (model via `PROFILE_MODEL`, default `claude-sonnet-4-6`),
+which extracts contact info, education, skills, projects, experience, and awards, then infers
+target roles/locations/industries, a salary target, a resume summary, and a starter cover letter
+— all matching the schema the agent reads. Review the output before applying.
+
+Or edit `profile.yaml` directly, then run:
 
 ```bash
 # CLI

@@ -7,6 +7,10 @@ Changes from v3.3:
   - quick_score() factors in both distance and livability
   - quick_score_batch() still parallel (10 threads)
   - Remote = 0 miles, score 95
+
+Changes from v3.4 → v3.5:
+  - BOARD_KEYWORDS expanded with rotational/development program terms
+  - _fetch_serpapi_jobs queries expanded with program-focused searches
 """
 
 import os, sys, json, yaml, re, requests
@@ -268,6 +272,12 @@ def fetch_ats_jobs(company_slug: str, platform: str = "greenhouse") -> str:
             "quantitative", "quant", "software engineer", "nlp",
             "deep learning", "research engineer", "research scientist",
             "python", "statistician", "analyst",
+            # development / rotational programs
+            "rotational program", "development program", "associate program",
+            "technology development", "leadership development", "technology analyst",
+            "analyst program", "new grad program", "early career program",
+            "early careers", "technology associate", "associate developer",
+            "rotational analyst", "software development program",
         ]
         relevant, all_roles = [], []
         for j in jobs:
@@ -378,6 +388,8 @@ JOB: {title} at {company} ({location})
 
 Factor in BOTH role fit AND location quality. Remote/nearby = strong bonus.
 International is fine for excellent roles. Low livability cities = slight penalty.
+Development programs, rotational programs, and analyst programs at strong companies
+are highly desirable for a new grad — treat these as Strong if the company/industry fits.
 Reply ONLY one word: Strong, Maybe, or Skip."""}]
         )
         text = resp.content[0].text.strip().lower()
@@ -570,10 +582,19 @@ BOARD_SOURCES = [
 ]
 
 BOARD_KEYWORDS = {
+    # core technical roles
     "data scientist", "data analyst", "ml engineer", "machine learning",
     "quantitative", "quant", "applied scientist", "research scientist",
     "data engineer", "nlp", "ai engineer", "statistician", "research analyst",
     "analytics engineer",
+    # development / rotational programs
+    "rotational program", "development program", "associate program",
+    "technology development", "leadership development", "technology analyst",
+    "analyst program", "new grad program", "early career program",
+    "early careers", "technology associate", "associate developer",
+    "rotational analyst", "software development program",
+    "technology development program", "analyst development program",
+    "associate scientist", "associate engineer", "associate analyst",
 }
 
 def _md_extract(cell: str) -> tuple[str, str]:
@@ -663,6 +684,7 @@ def fetch_board_data(force: bool = False) -> dict:
         except Exception: pass
 
     serp = _fetch_serpapi_jobs([
+        # ── Core technical roles ──────────────────────────────────────────
         "data scientist new grad 2026 NYC",
         "quantitative analyst new grad 2026",
         "ML engineer entry level 2026",
@@ -673,6 +695,17 @@ def fetch_board_data(force: bool = False) -> dict:
         "Bloomberg quantitative new grad 2026",
         "Goldman Sachs quantitative analyst new grad 2026",
         "Two Sigma new grad data scientist 2026",
+        # ── Development / rotational programs ────────────────────────────
+        "technology development program new grad 2026",
+        "analyst development program entry level 2026 data",
+        "rotational program new grad 2026 analytics",
+        "leadership development program quantitative finance 2026",
+        "associate technology program new grad 2026 ML",
+        "software engineer development program 2026 new grad",
+        "early career program data science 2026",
+        "technology analyst program new grad finance 2026",
+        "new grad rotational program data machine learning 2026",
+        "associate analyst program entry level 2026 tech",
     ])
     all_jobs.extend(serp)
     if serp: print(".", end="", flush=True)
@@ -791,7 +824,8 @@ def make_orchestrator() -> Agent:
     return Agent("Orchestrator",
         """You are the orchestrator for a job-hunting assistant.
 Candidate: 2026 new grad (Math+Econ, Hamilton College), ML/AI/GNN research, based in Princeton NJ.
-Target: biotech AI, healthcare AI, fintech/quant, tech.
+Target: biotech AI, healthcare AI, fintech/quant, tech — including rotational programs,
+development programs, analyst programs, and associate programs at strong companies.
 Agents: search_agent (jobs), eval_agent (fit/materials), tracker_agent (tracker).
 Route tasks appropriately. Synthesize into clean final answers.""",
         ORCH_TOOLS,
@@ -830,14 +864,17 @@ def trim_history(history: list) -> list:
 
 BANNER = """
 ╔══════════════════════════════════════════════════════════════╗
-║       Job Hunting Agent  v3.4  ·  Multi-Agent + Triage       ║
+║       Job Hunting Agent  v3.5  ·  Multi-Agent + Triage       ║
 ║  Distance & livability scoring from Princeton NJ             ║
+║  Now surfaces rotational & development programs              ║
 ║  Type 'help' for examples  ·  'quit' to exit                 ║
 ╚══════════════════════════════════════════════════════════════╝"""
 
 HELP = """
 Examples:
   > search AI engineer new grad 2026 fintech NYC
+  > search technology development program 2026
+  > search rotational program data science 2026
   > fetch jobs at anthropic
   > score my fit for data scientist at citadel
   > tailor my resume for ML engineer at openai

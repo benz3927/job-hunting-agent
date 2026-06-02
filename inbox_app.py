@@ -1,9 +1,16 @@
 """
-Job Hunting Inbox  v1.8  —  Flask Approval UI
+Job Hunting Inbox  v2.1  —  Flask Approval UI  (light theme)
 ──────────────────────────────────────────────
-Changes from v1.7:
-  - Top-10 digest emails at 8:05am, 12:00pm, 5:00pm
-  - Digest shows ranked table: company, role, location, triage, fit score, apply link
+Visual refresh from v2.0:
+  - Light, calm productivity-tool look (off-white bg, white cards, soft shadows)
+  - Muted accent colors + pale tinted badges instead of neon-on-black
+  - Email digest restyled to match (white card, light table)
+  - NO logic changes: all routes, filtering, tiering, scheduler identical to v2.0
+
+Original v2.0 changes (unchanged here):
+  - tiering layer (tiers.py): every job gets a tier (A/B/C) + tier_score
+  - tabs: Daily Watch · Top 25 · Everything
+  - default tab "tight"; _within_days parses "Mar 19"/"May 29"; score on fetch+render
 
 Run:  python inbox_app.py
 UI:   http://localhost:5050
@@ -29,6 +36,9 @@ from job_agent import (
     distance_label, livability_label,
 )
 
+# NEW: tiering / scoring layer
+from tiers import tier_jobs, score_and_tier
+
 try:
     from auto_submit import auto_submit_with_context as auto_submit, _detect_platform
     AUTO_SUBMIT_AVAILABLE = True
@@ -40,6 +50,7 @@ EMAIL_FROM   = os.environ.get("EMAIL_FROM", "")
 EMAIL_TO     = os.environ.get("EMAIL_TO", "")
 EMAIL_PASS   = os.environ.get("EMAIL_PASSWORD", "")
 PORT         = 5050
+TIGHT_LIMIT  = 25
 TRIAGE_ORDER = {"Strong": 0, "Maybe": 1, "": 2, "Skip": 3}
 
 app = Flask(__name__)
@@ -47,34 +58,76 @@ _batch_state = {"running":False,"total":0,"done":0,"current":"","errors":[],"com
 _batch_lock  = threading.Lock()
 
 ATS_WATCHLIST = [
-    {"slug":"anthropic","platform":"greenhouse"},{"slug":"openai","platform":"greenhouse"},
-    {"slug":"citadel","platform":"greenhouse"},{"slug":"palantir","platform":"greenhouse"},
-    {"slug":"recursionpharmaceuticals","platform":"greenhouse"},{"slug":"genentech","platform":"greenhouse"},
-    {"slug":"stripe","platform":"greenhouse"},{"slug":"twosigma","platform":"greenhouse"},
-    {"slug":"deshaw","platform":"greenhouse"},
-    {"slug":"ramp","platform":"lever"},{"slug":"scale-ai","platform":"lever"},
-    {"slug":"jane-street","platform":"lever"},{"slug":"notion","platform":"lever"},
-    {"slug":"tempus-ex","platform":"lever"},
+    # tech / AI
+    {"slug":"anthropic",              "platform":"greenhouse"},
+    {"slug":"openai",                 "platform":"greenhouse"},
+    {"slug":"palantir",               "platform":"greenhouse"},
+    {"slug":"recursionpharmaceuticals","platform":"greenhouse"},
+    {"slug":"genentech",              "platform":"greenhouse"},
+    {"slug":"stripe",                 "platform":"greenhouse"},
+    {"slug":"ramp",                   "platform":"lever"},
+    {"slug":"scale-ai",               "platform":"lever"},
+    {"slug":"jane-street",            "platform":"lever"},
+    {"slug":"notion",                 "platform":"lever"},
+    {"slug":"tempus-ex",              "platform":"lever"},
+    # quant / finance — known for strong new-grad programs
+    {"slug":"citadel",                "platform":"greenhouse"},
+    {"slug":"twosigma",               "platform":"greenhouse"},
+    {"slug":"deshaw",                 "platform":"greenhouse"},
+    # companies with well-known rotational / development programs
+    {"slug":"blackrock",              "platform":"greenhouse"},
+    {"slug":"capitalonetech",         "platform":"greenhouse"},  # TDP
+    {"slug":"microsoft",              "platform":"greenhouse"},  # EXPLORE, MSFP
+    {"slug":"amazon",                 "platform":"greenhouse"},  # BDSP, rotational
+    {"slug":"jpmorgan",               "platform":"greenhouse"},  # tech analyst program
+    {"slug":"goldmansachs",           "platform":"greenhouse"},  # new analyst
+    {"slug":"mckinsey",               "platform":"greenhouse"},
+    {"slug":"bcg",                    "platform":"greenhouse"},
 ]
 
 ROLE_KEYWORDS = {
-    "data scientist","data science","data analyst","data analysis",
-    "data engineer","data engineering","analytics engineer",
-    "machine learning","ml engineer","ml researcher","deep learning","reinforcement learning",
-    "ai engineer","ai researcher","ai scientist","artificial intelligence",
-    "applied scientist","applied ai","applied ml","research scientist","research engineer",
-    "nlp","natural language","llm","language model",
-    "quantitative","quant researcher","quant analyst","quant developer","quant trader",
-    "algorithmic","algo trader","risk analyst","financial analyst","finance analyst",
-    "investment analyst","portfolio analyst","strategy analyst","trading",
-    "bioinformatics","computational biology","genomics","proteomics","drug discovery",
-    "molecular","biostatistician","clinical data","life sciences analyst","research analyst",
-    "software engineer","software developer","backend engineer","full stack","platform engineer",
-    "statistician","statistical analyst","business analyst","business intelligence",
-    "bi analyst","bi engineer","product analyst","growth analyst","operations analyst",
-    "new grad","entry level","junior","associate engineer","associate scientist",
-    "associate analyst","early career",
+    # core data / ML
+    "data scientist", "data science", "data analyst", "data analysis",
+    "data engineer", "data engineering", "analytics engineer",
+    "machine learning", "ml engineer", "ml researcher", "deep learning", "reinforcement learning",
+    "ai engineer", "ai researcher", "ai scientist", "artificial intelligence",
+    "applied scientist", "applied ai", "applied ml", "research scientist", "research engineer",
+    "nlp", "natural language", "llm", "language model",
+    # quant / finance
+    "quantitative", "quant researcher", "quant analyst", "quant developer", "quant trader",
+    "algorithmic", "algo trader", "risk analyst", "financial analyst", "finance analyst",
+    "investment analyst", "portfolio analyst", "strategy analyst", "trading",
+    # biotech / life sciences
+    "bioinformatics", "computational biology", "genomics", "proteomics", "drug discovery",
+    "molecular", "biostatistician", "clinical data", "life sciences analyst", "research analyst",
+    # software / platform
+    "software engineer", "software developer", "backend engineer", "full stack", "platform engineer",
+    # stats / BI
+    "statistician", "statistical analyst", "business analyst", "business intelligence",
+    "bi analyst", "bi engineer", "product analyst", "growth analyst", "operations analyst",
+    # generic entry signals
+    "new grad", "entry level", "junior", "associate engineer", "associate scientist",
+    "associate analyst", "early career",
+    # ── development / rotational programs ─────────────────────────────────────
+    "rotational program", "development program", "associate program",
+    "technology development program", "leadership development program",
+    "analyst development program", "technology analyst program",
+    "software development program", "technology associate",
+    "early career program", "new grad program", "early careers",
+    "associate developer", "rotational analyst", "technology analyst",
+    "technology leadership", "technology development", "leadership development",
+    "analyst program", "associate program",
 }
+
+# Titles containing any of these are always treated as entry-level,
+# even if a senior/staff/lead word also appears elsewhere in the string.
+PROGRAM_SIGNALS = {
+    "development program", "rotational program", "analyst program",
+    "associate program", "early career program", "technology analyst program",
+    "technology development program", "leadership development program",
+    "analyst development program", "software development program",
+}
+
 PHD_SIGNALS = {
     " phd", "ph.d", "phd intern", "phd student", "doctoral", "postdoc",
     "post-doc", "post doc", "- phd", "(phd)", "/ phd",
@@ -91,6 +144,10 @@ SENIOR_SIGNALS = {
 ENTRY_SIGNALS = {
     "new grad","new-grad","entry level","entry-level","junior",
     "early career","associate","intern","0-2 years","0-1 year",
+    # programs
+    "rotational program","development program","analyst program",
+    "associate program","technology analyst","technology associate",
+    "early careers",
 }
 GOOD_LOCATIONS = {
     "united states","u.s.","usa","remote","north america",
@@ -140,6 +197,8 @@ def _is_relevant_role(title): return any(kw in title.lower() for kw in ROLE_KEYW
 
 def _is_entry_level(title):
     t = title.lower()
+    # Programs always pass regardless of any other signals
+    if any(s in t for s in PROGRAM_SIGNALS): return True
     if any(s in t for s in ENTRY_SIGNALS): return True
     if any(s in t for s in SENIOR_SIGNALS): return False
     return True
@@ -218,22 +277,46 @@ def _location_has_any_state(job, states: list[str]) -> bool:
                 return True
     return False
 
+# ── Months for the "Mar 19" / "May 29" date format ────────────────────────────
+_MONTHS = {"jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"}
+
 def _within_days(job, days: int) -> bool:
     date_str = job.get("date_posted","") or job.get("date_added","")
-    if not date_str: return True
-    try:
-        ds = date_str.lower().strip()
-        if any(w in ds for w in ("today","hour","just","minute")): return True
-        if "day" in ds:
-            m = re.search(r"\d+", ds)
-            return (int(m.group()) if m else 1) <= days
-        if "week" in ds:
-            m = re.search(r"\d+", ds)
-            return (int(m.group()) if m else 1) * 7 <= days
-        if "month" in ds: return False
-        return (date.today() - datetime.strptime(date_str[:10], "%Y-%m-%d").date()).days <= days
-    except Exception:
+    if not date_str or date_str.strip() in ("?","N/A",""):
+        # Undated jobs (mostly speedyapply "?") — keep them. Flip to False to hide.
         return True
+
+    ds = date_str.lower().strip()
+    if any(w in ds for w in ("today","hour","just","minute")):
+        return True
+    if "day" in ds:
+        m = re.search(r"\d+", ds)
+        return (int(m.group()) if m else 1) <= days
+    if "week" in ds:
+        m = re.search(r"\d+", ds)
+        return (int(m.group()) if m else 1) * 7 <= days
+    if "month" in ds:
+        return False
+
+    # ISO format first: 2026-03-19
+    try:
+        return (date.today() - datetime.strptime(date_str[:10], "%Y-%m-%d").date()).days <= days
+    except (ValueError, TypeError):
+        pass
+
+    # "Mar 19" / "May 29" — assume current year; if that lands in the future,
+    # it must be last year (e.g. checking "Dec 30" in early Jan).
+    if ds[:3] in _MONTHS:
+        try:
+            parsed = datetime.strptime(f"{date_str.strip()} {date.today().year}", "%b %d %Y").date()
+            if parsed > date.today():
+                parsed = parsed.replace(year=parsed.year - 1)
+            return (date.today() - parsed).days <= days
+        except ValueError:
+            pass
+
+    # Unparseable — keep it rather than silently dropping.
+    return True
 
 def apply_filters(jobs, days, loc_filter, states: list[str]):
     if days == "2":
@@ -259,7 +342,9 @@ def load_inbox():
 def save_inbox(jobs): INBOX_PATH.write_text(json.dumps(jobs, indent=2))
 
 def inbox_stats(jobs):
-    counts = {"new":0,"approved":0,"skipped":0,"pending":0,"strong":0,"maybe":0}
+    counts = {"new":0,"approved":0,"skipped":0,"pending":0,"strong":0,"maybe":0,
+              "daily":0,"tight":0,"rest":0}
+    new_jobs = [j for j in jobs if j.get("status") == "new"]
     for j in jobs:
         s = j.get("status","new")
         counts[s] = counts.get(s,0) + 1
@@ -267,6 +352,11 @@ def inbox_stats(jobs):
             t = j.get("triage","")
             if t == "Strong": counts["strong"] += 1
             elif t == "Maybe": counts["maybe"] += 1
+    # tier counts (only over "new")
+    view = tier_jobs(new_jobs, tight_limit=TIGHT_LIMIT)
+    counts["daily"] = len(view["daily"])
+    counts["tight"] = len(view["tight"])
+    counts["rest"]  = len(view["rest"])
     return counts
 
 def _exists(inbox, company, role):
@@ -276,7 +366,7 @@ def _exists(inbox, company, role):
 def _make_job(company, role, location, link, source):
     miles = distance_from_princeton(location)
     liv   = city_livability(location)
-    return {
+    job = {
         "id":               str(uuid.uuid4())[:8],
         "company":          _strip_html(company)[:50],
         "role":             _strip_html(role)[:80],
@@ -295,7 +385,11 @@ def _make_job(company, role, location, link, source):
         "resume_bullets":   "",
         "fit_score":        "",
         "auto_submitted":   False,
+        "tier":             "",
+        "tier_score":       0,
     }
+    score_and_tier(job)   # NEW: annotate tier + tier_score on creation
+    return job
 
 # ── Job fetching ──────────────────────────────────────────────────────────────
 
@@ -318,6 +412,7 @@ def fetch_all_new_jobs(clear_html_junk=False):
             if _exists(inbox, co, ro): continue
             entry = _make_job(co, ro, loc, j.get("link",""), j.get("source","Board"))
             entry["date_posted"] = j.get("date","")
+            score_and_tier(entry)   # re-score now that date_posted is set
             new_entries.append(entry)
             added += 1
     except Exception as e:
@@ -350,6 +445,8 @@ def fetch_all_new_jobs(clear_html_junk=False):
 
     if new_entries:
         quick_score_batch(new_entries, max_workers=10)
+        for e in new_entries:
+            score_and_tier(e)   # triage may have changed tier_score nudge
         inbox.extend(new_entries)
 
     save_inbox(inbox)
@@ -445,42 +542,35 @@ def send_top10_digest(label="Morning"):
         return "Email not configured."
     inbox = load_inbox()
 
-    def sort_key(j):
-        triage_order = {"Strong": 0, "Maybe": 1, "": 2, "Skip": 3}
-        score_str = j.get("fit_score", "") or ""
-        try:
-            score = -float(re.search(r"[\d.]+", score_str).group())
-        except:
-            score = 0
-        return (triage_order.get(j.get("triage", ""), 2), score)
-
+    # digest leads with Tier A (daily watch), then top Tier B by score
     new_jobs = [j for j in inbox if j.get("status") == "new" and j.get("triage") != "Skip"]
-    top10 = sorted(new_jobs, key=sort_key)[:10]
+    view = tier_jobs(new_jobs, tight_limit=TIGHT_LIMIT)
+    top10 = (view["daily"] + view["tight"])[:10]
 
     if not top10:
         return "No new jobs to send."
 
     rows = []
     for i, j in enumerate(top10, 1):
-        triage = j.get("triage", "")
-        if triage == "Strong":
-            badge = '<span style="background:#14291a;color:#86efac;padding:2px 7px;border-radius:4px;font-size:.72rem;font-weight:700">🟢 Strong</span>'
-        elif triage == "Maybe":
-            badge = '<span style="background:#2d2200;color:#fcd34d;padding:2px 7px;border-radius:4px;font-size:.72rem;font-weight:700">🟡 Maybe</span>'
+        tier = j.get("tier", "")
+        if tier == "A":
+            badge = '<span style="background:#f3e8ff;color:#7c3aed;padding:2px 7px;border-radius:4px;font-size:.72rem;font-weight:700">🔥 Daily</span>'
+        elif tier == "B":
+            badge = '<span style="background:#dcfce7;color:#15803d;padding:2px 7px;border-radius:4px;font-size:.72rem;font-weight:700">⭐ Top</span>'
         else:
             badge = ""
-        score = j.get("fit_score", "")
-        score_html = f'<span style="background:#1e3a5f;color:#93c5fd;padding:2px 7px;border-radius:4px;font-size:.72rem;font-weight:700">🎯 {score}</span>' if score else ""
+        score = j.get("tier_score", "")
+        score_html = f'<span style="background:#dbeafe;color:#1d4ed8;padding:2px 7px;border-radius:4px;font-size:.72rem;font-weight:700">🎯 {score}</span>' if score else ""
         link = j.get("link", "")
-        link_html = f'<a href="{link}" style="color:#60a5fa;font-size:.8rem">Apply →</a>' if link else ""
+        link_html = f'<a href="{link}" style="color:#2563eb;font-size:.8rem;font-weight:700">Apply →</a>' if link else ""
         date_str = j.get("date_posted", "") or j.get("date_added", "")
         rows.append(f"""
-        <tr style="border-bottom:1px solid #2a2d3a">
-          <td style="padding:10px 8px;color:#94a3b8;font-size:.8rem;text-align:center">{i}</td>
+        <tr style="border-bottom:1px solid #e4e7ec">
+          <td style="padding:10px 8px;color:#6b7280;font-size:.8rem;text-align:center">{i}</td>
           <td style="padding:10px 12px">
-            <div style="font-size:.7rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em">{j['company']}</div>
-            <div style="font-weight:700;font-size:.9rem;margin-top:2px">{j['role']}</div>
-            <div style="font-size:.74rem;color:#94a3b8;margin-top:3px">📍 {j.get('location','?')} &nbsp;·&nbsp; 📅 {date_str}</div>
+            <div style="font-size:.7rem;color:#6b7280;text-transform:uppercase;letter-spacing:.05em">{j['company']}</div>
+            <div style="font-weight:700;font-size:.9rem;margin-top:2px;color:#1f2733">{j['role']}</div>
+            <div style="font-size:.74rem;color:#6b7280;margin-top:3px">📍 {j.get('location','?')} &nbsp;·&nbsp; 📅 {date_str}</div>
           </td>
           <td style="padding:10px 8px;text-align:center">{badge}</td>
           <td style="padding:10px 8px;text-align:center">{score_html}</td>
@@ -491,19 +581,19 @@ def send_top10_digest(label="Morning"):
     app_link = f"http://localhost:{PORT}"
 
     html_body = f"""<html>
-    <body style="background:#0f1117;color:#e2e8f0;font-family:system-ui,sans-serif;padding:24px;max-width:820px;margin:0 auto">
-      <h2 style="margin-bottom:4px">📋 {label} Job Digest — {date.today()}</h2>
-      <p style="color:#94a3b8;margin-bottom:4px">Top {len(top10)} new jobs to review</p>
-      {"" if not pending_count else f'<p style="color:#fb923c;margin-bottom:4px">⚠️ {pending_count} application(s) still need manual submit</p>'}
-      <p style="margin-bottom:20px"><a href="{app_link}" style="color:#60a5fa;font-weight:700">→ Open Job Inbox</a></p>
-      <table style="width:100%;border-collapse:collapse;background:#1a1d27;border-radius:10px;overflow:hidden;font-size:.85rem">
+    <body style="background:#f6f7f9;color:#1f2733;font-family:system-ui,sans-serif;padding:24px;max-width:820px;margin:0 auto">
+      <h2 style="margin-bottom:4px;color:#1f2733">📋 {label} Job Digest — {date.today()}</h2>
+      <p style="color:#6b7280;margin-bottom:4px">Top {len(top10)} — Daily Watch first, then your best matches</p>
+      {"" if not pending_count else f'<p style="color:#ea580c;margin-bottom:4px">⚠️ {pending_count} application(s) still need manual submit</p>'}
+      <p style="margin-bottom:20px"><a href="{app_link}" style="color:#2563eb;font-weight:700">→ Open Job Inbox</a></p>
+      <table style="width:100%;border-collapse:collapse;background:#ffffff;border:1px solid #e4e7ec;border-radius:10px;overflow:hidden;font-size:.85rem;box-shadow:0 1px 3px rgba(16,24,40,.05)">
         <thead>
-          <tr style="background:#12151f">
-            <th style="padding:10px 8px;color:#94a3b8;font-size:.7rem;text-transform:uppercase;text-align:center">#</th>
-            <th style="padding:10px 12px;color:#94a3b8;font-size:.7rem;text-transform:uppercase;text-align:left">Role</th>
-            <th style="padding:10px 8px;color:#94a3b8;font-size:.7rem;text-transform:uppercase;text-align:center">Triage</th>
-            <th style="padding:10px 8px;color:#94a3b8;font-size:.7rem;text-transform:uppercase;text-align:center">Fit</th>
-            <th style="padding:10px 8px;color:#94a3b8;font-size:.7rem;text-transform:uppercase;text-align:center">Link</th>
+          <tr style="background:#f1f3f5">
+            <th style="padding:10px 8px;color:#6b7280;font-size:.7rem;text-transform:uppercase;text-align:center">#</th>
+            <th style="padding:10px 12px;color:#6b7280;font-size:.7rem;text-transform:uppercase;text-align:left">Role</th>
+            <th style="padding:10px 8px;color:#6b7280;font-size:.7rem;text-transform:uppercase;text-align:center">Tier</th>
+            <th style="padding:10px 8px;color:#6b7280;font-size:.7rem;text-transform:uppercase;text-align:center">Score</th>
+            <th style="padding:10px 8px;color:#6b7280;font-size:.7rem;text-transform:uppercase;text-align:center">Link</th>
           </tr>
         </thead>
         <tbody>{''.join(rows)}</tbody>
@@ -537,42 +627,43 @@ PAGE = r"""<!DOCTYPE html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Job Inbox</title>
 <style>
-:root{--bg:#0f1117;--card:#1a1d27;--border:#2a2d3a;--green:#22c55e;--red:#ef4444;
-  --blue:#3b82f6;--yellow:#f59e0b;--purple:#a855f7;--orange:#f97316;
-  --text:#e2e8f0;--muted:#94a3b8;--r:10px}
+:root{--bg:#f6f7f9;--card:#ffffff;--border:#e4e7ec;--green:#16a34a;--red:#dc2626;
+  --blue:#2563eb;--yellow:#d97706;--purple:#7c3aed;--orange:#ea580c;
+  --text:#1f2733;--muted:#6b7280;--r:10px}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min-height:100vh}
 
 .hdr{background:var(--card);border-bottom:1px solid var(--border);padding:12px 24px;
-  display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:100}
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:100;
+  box-shadow:0 1px 3px rgba(16,24,40,.04)}
 .hdr h1{font-size:1.1rem;font-weight:800;white-space:nowrap}
-.stat{background:var(--bg);border:1px solid var(--border);border-radius:6px;
-  padding:4px 10px;font-size:.78rem;white-space:nowrap}
+.stat{background:#f1f3f5;border:1px solid var(--border);border-radius:6px;
+  padding:4px 10px;font-size:.78rem;white-space:nowrap;color:var(--text)}
 .stat b{font-size:.9rem}
 .hdr-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
 
-.filter-bar{background:#12151f;border-bottom:1px solid var(--border);padding:10px 24px;
+.filter-bar{background:#fbfcfd;border-bottom:1px solid var(--border);padding:10px 24px;
   display:flex;flex-direction:column;gap:10px}
 .filter-row{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
 .filter-label{font-size:.72rem;color:var(--muted);white-space:nowrap;font-weight:700;
   text-transform:uppercase;letter-spacing:.05em;padding-top:5px;min-width:70px}
 .pill-group{display:flex;flex-wrap:wrap;gap:5px}
 .pill{padding:4px 11px;border-radius:20px;border:1px solid var(--border);
-  background:transparent;color:var(--muted);font-size:.76rem;cursor:pointer;
+  background:#fff;color:var(--muted);font-size:.76rem;cursor:pointer;
   transition:all .15s;white-space:nowrap;user-select:none}
-.pill:hover{border-color:#4a4d5a;color:var(--text)}
+.pill:hover{border-color:#c4cad3;color:var(--text)}
 .pill.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700}
-.pill.on-green{background:var(--green);border-color:var(--green);color:#000;font-weight:700}
+.pill.on-green{background:var(--green);border-color:var(--green);color:#fff;font-weight:700}
 .pill.on-orange{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700}
 .state-pill{padding:3px 8px;border-radius:12px;border:1px solid var(--border);
-  background:transparent;color:var(--muted);font-size:.7rem;cursor:pointer;
+  background:#fff;color:var(--muted);font-size:.7rem;cursor:pointer;
   transition:all .15s;white-space:nowrap;user-select:none}
-.state-pill:hover{border-color:#4a4d5a;color:var(--text)}
+.state-pill:hover{border-color:#c4cad3;color:var(--text)}
 .state-pill.on{background:var(--purple);border-color:var(--purple);color:#fff;font-weight:700}
 .state-clear{font-size:.7rem;color:var(--blue);background:none;border:none;
   cursor:pointer;padding:3px 6px;text-decoration:underline}
 
-.bulk-bar{background:#1e2130;border-bottom:1px solid var(--border);padding:9px 24px;
+.bulk-bar{background:#eef2ff;border-bottom:1px solid var(--border);padding:9px 24px;
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:44px}
 .bulk-bar.hidden{display:none}
 .sel-count{font-size:.82rem;color:var(--muted)}.sel-count b{color:var(--text)}
@@ -580,24 +671,26 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .progress-wrap.show{display:block}
 .progress-label{font-size:.78rem;color:var(--muted);margin-bottom:5px}
 .progress-label b{color:var(--text)}
-.progress-track{background:var(--border);border-radius:99px;height:7px;overflow:hidden}
+.progress-track{background:#e4e7ec;border-radius:99px;height:7px;overflow:hidden}
 .progress-fill{background:var(--green);height:100%;border-radius:99px;transition:width .3s;width:0%}
 
 .btn{padding:6px 13px;border-radius:7px;border:none;cursor:pointer;font-size:.78rem;
   font-weight:700;transition:opacity .15s,transform .1s;line-height:1}
-.btn:hover{opacity:.85}.btn:active{transform:scale(.97)}
-.btn-green{background:var(--green);color:#000}.btn-gray{background:var(--border);color:var(--text)}
-.btn-blue{background:var(--blue);color:#fff}.btn-yellow{background:var(--yellow);color:#000}
+.btn:hover{opacity:.88}.btn:active{transform:scale(.97)}
+.btn-green{background:var(--green);color:#fff}
+.btn-gray{background:#eef0f3;color:var(--text);border:1px solid var(--border)}
+.btn-blue{background:var(--blue);color:#fff}.btn-yellow{background:var(--yellow);color:#fff}
 .btn-purple{background:var(--purple);color:#fff}.btn-orange{background:var(--orange);color:#fff}
 .btn-sm{padding:4px 9px;font-size:.74rem}
-.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
 
-.tabs{display:flex;gap:2px;padding:12px 24px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tabs{display:flex;gap:2px;padding:12px 24px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;background:var(--card)}
 .tab{padding:7px 14px;border-radius:8px 8px 0 0;cursor:pointer;font-size:.8rem;
   color:var(--muted);border:1px solid transparent;border-bottom:none;background:transparent}
 .tab:hover{color:var(--text)}
-.tab.active{background:var(--card);color:var(--text);font-weight:700;
-  border-color:var(--border);border-bottom-color:var(--card);margin-bottom:-1px}
+.tab.active{background:var(--bg);color:var(--text);font-weight:700;
+  border-color:var(--border);border-bottom-color:var(--bg);margin-bottom:-1px}
+.tab-sep{width:1px;background:var(--border);margin:4px 6px 0}
 
 .main{padding:18px 24px 40px}
 .result-info{font-size:.78rem;color:var(--muted);margin-bottom:12px}
@@ -606,42 +699,48 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--muted);font-size:1rem}
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
-  padding:14px;display:flex;flex-direction:column;gap:9px;transition:border-color .2s,opacity .2s}
-.card:hover{border-color:#3a3d50}
+  padding:14px;display:flex;flex-direction:column;gap:9px;
+  box-shadow:0 1px 2px rgba(16,24,40,.03);transition:border-color .2s,box-shadow .2s,opacity .2s}
+.card:hover{border-color:#cbd2d9;box-shadow:0 2px 8px rgba(16,24,40,.06)}
 .card.approved{border-left:3px solid var(--green)}.card.pending{border-left:3px solid var(--orange)}
-.card.skipped{opacity:.5}.card.selected{border-color:var(--purple);background:#1e1a2e}
+.card.skipped{opacity:.55}.card.selected{border-color:var(--purple);background:#faf8ff}
 .card.loading{opacity:.6;pointer-events:none}.card.done-anim{border-left:3px solid var(--green)}
-.card.triage-strong{border-left:3px solid #22c55e}
-.card.triage-maybe{border-left:3px solid #f59e0b}
-.card.triage-skip{opacity:.6}
+.card.tier-a{border-left:3px solid var(--purple)}
+.card.tier-b{border-left:3px solid var(--green)}
+.card.triage-strong{border-left:3px solid var(--green)}
+.card.triage-maybe{border-left:3px solid var(--yellow)}
+.card.triage-skip{opacity:.62}
 .card-check{display:flex;align-items:center;gap:8px}
 .card-check input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--purple)}
 .card-check label{font-size:.73rem;color:var(--muted);cursor:pointer;user-select:none}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .co-name{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.role-name{font-size:.95rem;font-weight:700;margin-top:2px;line-height:1.3}
+.role-name{font-size:.95rem;font-weight:700;margin-top:2px;line-height:1.3;color:var(--text)}
 .badges{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0}
 .badge{padding:2px 7px;border-radius:4px;font-size:.68rem;font-weight:700;white-space:nowrap}
-.b-ats{background:#1e3a5f;color:#60a5fa}.b-board{background:#1a2e1a;color:#86efac}
-.b-google{background:#2d1f0e;color:#fcd34d}
-.t-strong{background:#14291a;color:#86efac;border-radius:4px;padding:2px 7px;font-size:.68rem;font-weight:700}
-.t-maybe{background:#2d2200;color:#fcd34d;border-radius:4px;padding:2px 7px;font-size:.68rem;font-weight:700}
-.t-skip{background:#2d1a1a;color:#f87171;border-radius:4px;padding:2px 7px;font-size:.68rem;font-weight:700}
+.b-ats{background:#dbeafe;color:#1d4ed8}.b-board{background:#dcfce7;color:#15803d}
+.b-google{background:#fef3c7;color:#b45309}
+.t-daily{background:#f3e8ff;color:#7c3aed;border-radius:4px;padding:2px 7px;font-size:.68rem;font-weight:700}
+.t-top{background:#dcfce7;color:#15803d;border-radius:4px;padding:2px 7px;font-size:.68rem;font-weight:700}
+.t-strong{background:#dcfce7;color:#15803d;border-radius:4px;padding:2px 7px;font-size:.68rem;font-weight:700}
+.t-maybe{background:#fef3c7;color:#b45309;border-radius:4px;padding:2px 7px;font-size:.68rem;font-weight:700}
+.t-skip{background:#fee2e2;color:#b91c1c;border-radius:4px;padding:2px 7px;font-size:.68rem;font-weight:700}
 .meta{font-size:.75rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:5px;align-items:center}
-.score-pill{background:#1e3a5f;color:#93c5fd;border-radius:4px;padding:1px 6px;font-weight:700}
-.dist-pill{background:#1e1e2e;color:#a5b4fc;border-radius:4px;padding:1px 6px;font-size:.68rem}
+.score-pill{background:#dbeafe;color:#1d4ed8;border-radius:4px;padding:1px 6px;font-weight:700}
+.tier-pill{background:#ede9fe;color:#6d28d9;border-radius:4px;padding:1px 6px;font-weight:700;font-size:.68rem}
+.dist-pill{background:#eef2ff;color:#4338ca;border-radius:4px;padding:1px 6px;font-size:.68rem}
 .liv-pill{border-radius:4px;padding:1px 6px;font-size:.68rem;font-weight:600}
 .card-actions{display:flex;gap:5px;flex-wrap:wrap}
 .mat{display:none;border-top:1px solid var(--border);padding-top:10px;margin-top:1px;flex-direction:column;gap:9px}
 .mat.open{display:flex}
 .mat h4{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
-.mat pre{font-size:.76rem;white-space:pre-wrap;line-height:1.5;background:var(--bg);
-  border-radius:6px;padding:9px;max-height:200px;overflow-y:auto;border:1px solid var(--border)}
+.mat pre{font-size:.76rem;white-space:pre-wrap;line-height:1.5;background:#f6f7f9;
+  border-radius:6px;padding:9px;max-height:200px;overflow-y:auto;border:1px solid var(--border);color:var(--text)}
 .copy-btn{font-size:.68rem;float:right;cursor:pointer;color:var(--blue);background:none;border:none}
 .copy-btn:hover{text-decoration:underline}
 .toast{position:fixed;bottom:18px;right:18px;padding:9px 16px;border-radius:8px;
-  font-weight:700;font-size:.82rem;display:none;z-index:999;box-shadow:0 4px 20px rgba(0,0,0,.4)}
-.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.3);
+  font-weight:700;font-size:.82rem;display:none;z-index:999;box-shadow:0 4px 16px rgba(16,24,40,.18)}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.4);
   border-top-color:#fff;border-radius:50%;animation:sp .5s linear infinite;vertical-align:middle}
 @keyframes sp{to{transform:rotate(360deg)}}
 </style>
@@ -650,12 +749,12 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 
 <div class="hdr">
   <h1>📋 Job Inbox</h1>
-  <div class="stat">🆕 New <b>{{ stats.new }}</b></div>
-  <div class="stat" style="color:#86efac;border-color:#22c55e">🟢 Strong <b>{{ stats.strong }}</b></div>
-  <div class="stat" style="color:#fcd34d;border-color:#f59e0b">🟡 Maybe <b>{{ stats.maybe }}</b></div>
-  <div class="stat" style="color:#fb923c;border-color:#f97316">📬 To Submit <b>{{ stats.pending }}</b></div>
+  <div class="stat" style="color:#7c3aed;border-color:#ddd6fe">🔥 Daily <b>{{ stats.daily }}</b></div>
+  <div class="stat" style="color:#15803d;border-color:#bbf7d0">⭐ Top {{ tight_limit }} <b>{{ stats.tight }}</b></div>
+  <div class="stat">📂 Rest <b>{{ stats.rest }}</b></div>
+  <div class="stat" style="color:#ea580c;border-color:#fed7aa">📬 To Submit <b>{{ stats.pending }}</b></div>
   <div class="stat">✅ Applied <b>{{ stats.approved }}</b></div>
-  {% if auto_submit_on %}<div class="stat" style="color:#86efac;border-color:#22c55e">⚡ Auto-submit ON</div>{% endif %}
+  {% if auto_submit_on %}<div class="stat" style="color:#15803d;border-color:#bbf7d0">⚡ Auto-submit ON</div>{% endif %}
   <div class="hdr-actions">
     <button class="btn btn-blue" onclick="fetchJobs(this)">🔄 Fetch</button>
     <button class="btn btn-yellow" onclick="sendDigest(this)">📧 Digest</button>
@@ -676,7 +775,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     <div class="pill-group">
       <span class="pill {% if loc_filter=='all' %}on{% endif %}"       onclick="setLoc('all')">All</span>
       <span class="pill {% if loc_filter=='remote' %}on-green{% endif %}"
-        style="{% if loc_filter=='remote' %}background:var(--green);border-color:var(--green);color:#000;font-weight:700{% endif %}"
+        style="{% if loc_filter=='remote' %}background:var(--green);border-color:var(--green);color:#fff;font-weight:700{% endif %}"
         onclick="setLoc('remote')">🏠 Remote</span>
       <span class="pill {% if loc_filter=='princeton' %}on-orange{% endif %}"
         style="{% if loc_filter=='princeton' %}background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700{% endif %}"
@@ -715,10 +814,14 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 </div>
 
 <div class="tabs">
-  <div class="tab {{ 'active' if tab=='strong' }}"   onclick="setTab('strong')">🟢 Strong ({{ stats.strong }})</div>
-  <div class="tab {{ 'active' if tab=='maybe' }}"    onclick="setTab('maybe')">🟡 Maybe ({{ stats.maybe }})</div>
-  <div class="tab {{ 'active' if tab=='new' }}"      onclick="setTab('new')">All New ({{ stats.new }})</div>
-  <div class="tab {{ 'active' if tab=='pending' }}"  onclick="setTab('pending')" style="color:#fb923c">📬 To Submit ({{ stats.pending }})</div>
+  <div class="tab {{ 'active' if tab=='daily' }}"  onclick="setTab('daily')" style="color:#7c3aed">🔥 Daily Watch ({{ stats.daily }})</div>
+  <div class="tab {{ 'active' if tab=='tight' }}"  onclick="setTab('tight')" style="color:#15803d">⭐ Top {{ tight_limit }} ({{ stats.tight }})</div>
+  <div class="tab {{ 'active' if tab=='rest' }}"   onclick="setTab('rest')">📂 Everything ({{ stats.rest }})</div>
+  <div class="tab-sep"></div>
+  <div class="tab {{ 'active' if tab=='strong' }}" onclick="setTab('strong')">🟢 Strong ({{ stats.strong }})</div>
+  <div class="tab {{ 'active' if tab=='maybe' }}"  onclick="setTab('maybe')">🟡 Maybe ({{ stats.maybe }})</div>
+  <div class="tab-sep"></div>
+  <div class="tab {{ 'active' if tab=='pending' }}"  onclick="setTab('pending')" style="color:#ea580c">📬 To Submit ({{ stats.pending }})</div>
   <div class="tab {{ 'active' if tab=='approved' }}" onclick="setTab('approved')">✅ Applied ({{ stats.approved }})</div>
   <div class="tab {{ 'active' if tab=='skipped' }}"  onclick="setTab('skipped')">⏭ Skipped ({{ stats.skipped }})</div>
 </div>
@@ -726,6 +829,9 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 <div class="main">
 <div class="result-info">
   Showing <b>{{ jobs|length }}</b> job{{ 's' if jobs|length != 1 }}
+  {% if tab == 'daily' %} · <b>🔥 always-watch targets</b>
+  {% elif tab == 'tight' %} · <b>⭐ your best matches</b>
+  {% elif tab == 'rest' %} · <b>📂 the long tail</b>{% endif %}
   {% if days != 'all' %} · <b>past {{ days }} days</b>{% endif %}
   {% if loc_filter == 'remote' %} · <b>🏠 remote only</b>
   {% elif loc_filter == 'princeton' %} · <b>📍 Princeton area</b>
@@ -738,8 +844,8 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
   {% for j in jobs %}
   <div class="card {{ j.status }}
     {%- if j.status == 'new' %}
-      {%- if j.triage == 'Strong' %} triage-strong
-      {%- elif j.triage == 'Maybe' %} triage-maybe
+      {%- if j.tier == 'A' %} tier-a
+      {%- elif j.tier == 'B' %} tier-b
       {%- elif j.triage == 'Skip' %} triage-skip
       {%- endif %}
     {%- endif %}" id="card-{{ j.id }}">
@@ -760,6 +866,9 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
         <span class="badge {% if 'ATS' in j.source %}b-ats{% elif 'Google' in j.source %}b-google{% else %}b-board{% endif %}">
           {{ j.source.split('/')[0] }}
         </span>
+        {% if j.tier == 'A' %}<span class="t-daily">🔥 Daily</span>
+        {% elif j.tier == 'B' %}<span class="t-top">⭐ Top</span>
+        {% endif %}
         {% if j.triage == 'Strong' %}<span class="t-strong">🟢 Strong</span>
         {% elif j.triage == 'Maybe' %}<span class="t-maybe">🟡 Maybe</span>
         {% elif j.triage == 'Skip' %}<span class="t-skip">🔴 Skip</span>
@@ -771,18 +880,19 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
       <span>📍 {{ j.location }}</span>
       {% if j.distance_label %}<span class="dist-pill">✈️ {{ j.distance_label }}</span>{% endif %}
       {% if j.livability_label %}<span class="liv-pill"
-        style="background:{% if j.livability_score >= 85 %}#14291a;color:#86efac
-               {%- elif j.livability_score >= 75 %}#1a2200;color:#d9f99d
-               {%- elif j.livability_score >= 65 %}#2d2200;color:#fcd34d
-               {%- else %}#2d1a1a;color:#f87171{% endif %}">
+        style="background:{% if j.livability_score >= 85 %}#dcfce7;color:#15803d
+               {%- elif j.livability_score >= 75 %}#ecfccb;color:#4d7c0f
+               {%- elif j.livability_score >= 65 %}#fef3c7;color:#b45309
+               {%- else %}#fee2e2;color:#b91c1c{% endif %}">
         {{ j.livability_label }}
       </span>{% endif %}
     </div>
     <div class="meta">
       <span>📅 {{ j.date_posted if j.date_posted else j.date_added }}</span>
+      {% if j.tier_score %}<span class="tier-pill">📊 {{ j.tier_score }}</span>{% endif %}
       {% if j.fit_score %}<span class="score-pill">🎯 {{ j.fit_score }}</span>{% endif %}
-      {% if j.status == 'pending' %}<span style="color:#fb923c;font-weight:700;font-size:.73rem">📬 Needs submit</span>{% endif %}
-      {% if j.auto_submitted %}<span style="color:#86efac;font-weight:700;font-size:.73rem">⚡ Auto-submitted</span>{% endif %}
+      {% if j.status == 'pending' %}<span style="color:#ea580c;font-weight:700;font-size:.73rem">📬 Needs submit</span>{% endif %}
+      {% if j.auto_submitted %}<span style="color:#15803d;font-weight:700;font-size:.73rem">⚡ Auto-submitted</span>{% endif %}
     </div>
 
     <div class="card-actions">
@@ -855,9 +965,9 @@ function toggleState(st){
 }
 function clearStates(){ nav({states:null, loc:'all'}) }
 
-function toast(msg,color='#22c55e'){
+function toast(msg,color='#16a34a'){
   const t=document.getElementById('toast')
-  t.textContent=msg;t.style.background=color;t.style.color=color==='#f59e0b'?'#000':'#fff'
+  t.textContent=msg;t.style.background=color;t.style.color='#fff'
   t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',3500)
 }
 function toggleMat(id){ document.getElementById('mat-'+id).classList.toggle('open') }
@@ -900,11 +1010,11 @@ async function applyNow(id,btn){
       card.classList.remove('loading');card.classList.add('done-anim')
       setTimeout(()=>location.reload(),900)
     }else{
-      toast('Error: '+d.error,'#ef4444')
+      toast('Error: '+d.error,'#dc2626')
       card.classList.remove('loading');btn.innerHTML='🚀 Apply Now';btn.disabled=false
     }
   }catch(e){
-    toast('Network error','#ef4444')
+    toast('Network error','#dc2626')
     card.classList.remove('loading');btn.innerHTML='🚀 Apply Now';btn.disabled=false
   }
 }
@@ -913,7 +1023,7 @@ async function markApplied(id,btn){
   const r=await fetch('/mark_applied/'+id,{method:'POST'})
   const d=await r.json()
   if(d.ok){toast('✅ Marked as applied!');setTimeout(()=>location.reload(),600)}
-  else{toast('Error','#ef4444');btn.disabled=false}
+  else{toast('Error','#dc2626');btn.disabled=false}
 }
 
 let _pollTimer=null
@@ -924,7 +1034,7 @@ async function bulkApply(btn){
   const r=await fetch('/approve_batch',{method:'POST',
     headers:{'Content-Type':'application/json'},body:JSON.stringify({ids})})
   const d=await r.json()
-  if(!d.ok){toast('Batch start failed','#ef4444');btn.disabled=false;return}
+  if(!d.ok){toast('Batch start failed','#dc2626');btn.disabled=false;return}
   document.getElementById('progress-wrap').classList.add('show')
   document.getElementById('progress-total').textContent=ids.length
   deselectAll()
@@ -943,7 +1053,7 @@ async function pollBatch(){
       clearInterval(_pollTimer)
       document.getElementById('progress-wrap').classList.remove('show')
       toast(d.errors.length>0?`Done! ${d.done} processed, ${d.errors.length} failed`:`✅ All ${d.done} done!`,
-            d.errors.length>0?'#f59e0b':'#22c55e')
+            d.errors.length>0?'#d97706':'#16a34a')
       const btn=document.getElementById('bulk-btn')
       if(btn){btn.disabled=false;btn.innerHTML='🚀 Apply Selected (<span id="bulk-count">0</span>)'}
       setTimeout(()=>location.reload(),1500)
@@ -967,7 +1077,7 @@ async function fetchJobs(btn){
     const r=await fetch('/fetch',{method:'POST'})
     const d=await r.json()
     toast(d.message);setTimeout(()=>location.reload(),1200)
-  }catch(e){toast('Fetch failed','#ef4444')}
+  }catch(e){toast('Fetch failed','#dc2626')}
   finally{btn.innerHTML='🔄 Fetch';btn.disabled=false}
 }
 async function sendDigest(btn){
@@ -975,8 +1085,8 @@ async function sendDigest(btn){
   try{
     const r=await fetch('/digest',{method:'POST'})
     const d=await r.json()
-    toast(d.message,d.ok?'#22c55e':'#f59e0b')
-  }catch(e){toast('Error','#ef4444')}
+    toast(d.message,d.ok?'#16a34a':'#d97706')
+  }catch(e){toast('Error','#dc2626')}
   finally{btn.innerHTML='📧 Digest';btn.disabled=false}
 }
 </script>
@@ -986,7 +1096,7 @@ async function sendDigest(btn){
 
 @app.route("/")
 def index():
-    tab        = request.args.get("tab", "strong")
+    tab        = request.args.get("tab", "tight")   # NEW default: your working list
     days       = request.args.get("days", "all")
     loc_filter = request.args.get("loc", "all")
     states_raw = request.args.get("states", "")
@@ -995,13 +1105,17 @@ def index():
     inbox = load_inbox()
     stats = inbox_stats(inbox)
 
-    if tab == "strong":
-        jobs = [j for j in inbox if j.get("status")=="new" and j.get("triage")=="Strong"]
+    new_jobs = [j for j in inbox if j.get("status") == "new"]
+
+    if tab in ("daily", "tight", "rest"):
+        view = tier_jobs(new_jobs, tight_limit=TIGHT_LIMIT)
+        jobs = view[tab]
+    elif tab == "strong":
+        jobs = sorted([j for j in new_jobs if j.get("triage")=="Strong"],
+                      key=lambda x: -x.get("tier_score", 0))
     elif tab == "maybe":
-        jobs = [j for j in inbox if j.get("status")=="new" and j.get("triage")=="Maybe"]
-    elif tab == "new":
-        jobs = sorted([j for j in inbox if j.get("status")=="new"],
-                      key=lambda x: TRIAGE_ORDER.get(x.get("triage",""), 2))
+        jobs = sorted([j for j in new_jobs if j.get("triage")=="Maybe"],
+                      key=lambda x: -x.get("tier_score", 0))
     elif tab == "pending":
         jobs = [j for j in inbox if j.get("status")=="pending"]
     elif tab == "approved":
@@ -1009,7 +1123,7 @@ def index():
     elif tab == "skipped":
         jobs = [j for j in inbox if j.get("status")=="skipped"]
     else:
-        jobs = sorted(inbox, key=lambda x: TRIAGE_ORDER.get(x.get("triage",""), 2))
+        jobs = sorted(new_jobs, key=lambda x: -x.get("tier_score", 0))
 
     jobs = apply_filters(jobs, days, loc_filter, selected_states)
 
@@ -1019,6 +1133,7 @@ def index():
         selected_states=selected_states,
         all_states=US_STATES,
         state_names=STATE_NAMES,
+        tight_limit=TIGHT_LIMIT,
         auto_submit_on=AUTO_SUBMIT_AVAILABLE)
 
 @app.route("/fetch", methods=["POST"])
@@ -1096,10 +1211,11 @@ def start_scheduler():
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    print(f"\n📋  Job Hunting Inbox  v1.8")
+    print(f"\n📋  Job Hunting Inbox  v2.1")
     print(f"    http://localhost:{PORT}")
     print(f"    Auto-submit: {'✓ Playwright ready' if AUTO_SUBMIT_AVAILABLE else '✗ pip install playwright && playwright install chromium'}")
     print(f"    Email: {'✓ configured' if EMAIL_FROM else '✗ set EMAIL_FROM/TO/PASSWORD in .env'}")
+    print(f"    Tiers: 🔥 Daily Watch · ⭐ Top {TIGHT_LIMIT} · 📂 Everything")
     print(f"    Digests: 8:05am · 12:00pm · 5:00pm\n")
 
     threading.Thread(target=lambda: fetch_all_new_jobs(clear_html_junk=True),

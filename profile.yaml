@@ -1,82 +1,95 @@
-# ── Job Hunting Agent — Candidate Profile ────────────────────────────────────
+# === Job Hunting Agent - Candidate Profile ===
+# Auto-generated from a resume PDF by build_profile.py
 
 name: Benjamin Zhao
-email: bzhao@hamilton.edu
+email: benz3927@gmail.com
 phone: 609-356-2186
-linkedin: linkedin.com/in/benz3927
+linkedin: ''
 github: github.com/benz3927
 
 education:
-  degree: BA, Mathematics & Economics (double major)
-  school: Hamilton College
-  location: Clinton, NY
-  gpa: 3.71
-  graduation: May 2026
-  coursework:
-    - Real Analysis
-    - Seminar in Applied Probability
-    - Probability and Statistical Inference
-    - Deep Learning
-    - Data Structures and Algorithms
-    - Spacetime and Quantum World
-    - Econometrics
-    - Financial Economics
+  - degree: MS, Statistics
+    school: Rutgers University
+    location: New Brunswick, NJ
+    gpa: null
+    graduation: Expected May 2028
+  - degree: BA, Mathematics and Economics
+    school: Hamilton College
+    location: Clinton, NY
+    gpa: '3.71'
+    graduation: May 2026
+    coursework:
+      - Real Analysis
+      - Seminar in Applied Probability
+      - Probability and Statistical Inference
+      - Deep Learning
+      - Data Structures and Algorithms
+      - Spacetime and Quantum World
+      - Econometrics
+      - Financial Economics
 
 skills:
-  languages: [Python, R, SQL, C++, Stata, MATLAB, bash/UNIX]
-  ml_frameworks: [PyTorch, TensorFlow, scikit-learn, HuggingFace Transformers]
-  llm_tools: [LangChain, OpenAI API, Anthropic API, Gradio]
-  data: [pandas, NumPy, matplotlib, seaborn]
+  languages: [Python, R, SQL, C++, Stata, MATLAB, UNIX]
+  ml_frameworks: [PyTorch, TensorFlow]
+  llm_tools: [OpenAI, Claude, Hugging Face, LangChain]
   cloud: [AWS (S3, EC2, Athena), Microsoft Azure]
-  other: [SLURM, Git, GitHub, Linux, Pydantic, vector databases, Microsoft Office]
+  other: [GitHub, SLURM, Microsoft Office]
 
 projects:
   - name: Job Hunting Agent (Agentic AI App)
+    org: null
+    dates: Mar 2026
     bullets:
-      - Built an agentic job-hunting system using Anthropic SDK native tool use with 5 registered tools — job search (SerpAPI), ATS job fetching (Greenhouse/Lever APIs), fit scoring, resume tailoring, and application tracking
-      - Deployed as a Gradio web app; agent loop handles tool routing, execution, and multi-turn memory via sliding window history
+      - Built a multi-agent system using the Anthropic SDK with parallel job scoring and Playwright-based auto-fill for Greenhouse/Lever ATS platforms, automating applications across 50+ companies
 
-  - name: FOMC Transcript Dissent Analysis (Honors Thesis)
-    dates: Jan 2026 – Present
+  - name: 'Senior Honors Thesis: Do FOMC Transcripts Reveal More Dissent Than Votes?'
+    org: null
+    dates: Jan 2026 - May 2026
     bullets:
-      - Built GPT-4o few-shot scoring pipeline to quantify dissent in FOMC transcripts; found speech-based scores detect regional unemployment effects more than binary dissent votes
-      - Validated with Claude Sonnet robustness check (r=0.838 with GPT v8 scores)
+      - Built an LLM scoring pipeline to measure FOMC members' policy stances in meeting transcripts, showing that members' speech reveals more regional dissent than their recorded votes
+      - Manuscript in preparation; journal submission planned this summer
 
-  - name: Protein Quality Estimation Research (DProQV2)
-    org: Hamilton College CS Research Assistant — Prof. Shawn Chen
-    dates: Jan 2026 – Present
+  - name: 'DProQV2: Protein Structure Quality Assessment'
+    org: null
+    dates: Jan 2026 - Mar 2026
     bullets:
-      - Built DProQV2, a 12-layer GATv2 GNN (42.6M params) with gated attention (RMSNorm + SwiGLU) combining ESM3 embeddings with Rosetta energies, SASA/DSSP, and Voronoi features to predict lDDT for 1M+ protein decoys
-      - Scaled training across 20 parallel SLURM jobs on NVIDIA H200 GPU cluster with sequence-identity-based splits to prevent data leakage; achieved val_pearson_global ~0.894
+      - Built a 12-layer Gated Graph Transformer combining ESM-C embeddings with Rosetta energies to predict lDDT scores for 1M+ protein decoys; scaled training across 20 SLURM jobs on H200 GPUs
 
   - name: HamPlan RAG System
-    dates: Nov 2025 – Dec 2025
+    org: null
+    dates: Nov 2025 - Dec 2025
     bullets:
-      - Built RAG-powered course recommendation system using OpenAI API and 951 embeddings (courses, syllabi, department overviews)
-      - Deployed as web app at hamiltoncourses.com; presented to faculty with 3.8/5 satisfaction rating
+      - Built a RAG course recommendation system using the OpenAI API, deployed as a web app and presented to faculty
 
   - name: Medical Necessity Policy Extractor
+    org: null
     dates: Dec 2024
     bullets:
-      - Built a Python workflow using Pydantic, LangChain, and GPT-4 to automate extraction of procedure and diagnosis codes from medical policy documents
-      - Deployed as an interactive Gradio app on Hugging Face
+      - Built a LangChain + GPT-4 workflow extracting procedure/diagnosis codes from medical policies; deployed on Hugging Face
 
 experience:
+  - title: Computer Science Research Assistant
+    org: Hamilton College - Prof. Shawn Chen
+    dates: Jan 2026 - Mar 2026
+    bullets:
+      - Conducted deep learning research on computational proteomics and protein structure quality prediction
+      - Collaborated with faculty to design experiments, manage HPC cluster workflows, and contribute to the CASP17 benchmarking pipeline
+
   - title: Economics Summer Research Assistant
     org: Hamilton College
-    dates: May 2025 – Jun 2025
+    dates: May 2025 - Jun 2025
     bullets:
-      - Built database of international trade and aid flows from UN Comtrade, IMF, and World Bank using automated data pipelines
-      - Processed multi-source economic data to support quantitative analysis for Hamilton seniors' theses on trade policy
+      - Built automated pipelines aggregating international trade and aid flow data from UN Comtrade, IMF, and World Bank to support senior thesis research on trade policy
 
-  - title: Economics Tutor, QSR Center
+  - title: QSR Center Tutor
     org: Hamilton College
-    dates: Aug 2024 – May 2025
+    dates: Aug 2024 - May 2025
     bullets:
-      - Tutored economics students individually and in groups, helping them apply economic models and mathematical reasoning
+      - Tutored students individually and in groups in Introductory Economics and Macroeconomic Theory
 
 awards:
-  - "2nd place nationally, ASA Undergraduate Statistics Project Competition (autism screening analysis, Random Forest) — Mar 2023"
+  - Soper Research Prize, Hamilton College Economics Department - May 2026
+  - ASA Undergraduate Statistics Project Competition, 2nd Place - Mar 2023
 
 target_roles:
   - Applied AI Engineer
@@ -105,31 +118,34 @@ target_industries:
 salary_target_usd: 95000
 
 resume_summary: >
-  Hamilton senior (Math + Econ, GPA 3.71) with hands-on ML engineering experience spanning
-  GNN-based protein structure modeling, LLM-powered NLP pipelines, and RAG system deployment.
-  Comfortable with the full stack from SLURM cluster training to production-facing web apps.
-  National ASA competition award winner. Bilingual English/Chinese.
+  Hamilton senior (Math + Econ, GPA 3.71), heading to Rutgers for an MS in Statistics, with
+  hands-on ML engineering experience spanning Gated Graph Transformer protein structure modeling,
+  LLM-powered NLP pipelines, and RAG system deployment. Comfortable across the full stack from
+  SLURM cluster training to production-facing web apps. National ASA competition award winner.
 
 cover_letter_sample: >
-  Dear Hiring Manager,
+  Dear Hiring Team,
 
-  I am applying for the AI Engineer role on Point72's Portfolio Construction & Analytics Team.
-  As a Mathematics and Economics senior at Hamilton College graduating in May 2026, I have spent
-  the past year building and deploying AI systems — RAG pipelines, agentic workflows, and
-  LLM-powered tools — and I am eager to bring that to a team applying these technologies to
-  real investment problems.
+  I am writing to apply for the Applied AI Engineer role at your company. I am a Mathematics and
+  Economics senior at Hamilton College graduating in May 2026, heading to Rutgers for an MS in
+  Statistics, and I have spent the past year building and deploying machine learning systems end
+  to end.
 
-  My most relevant project is a job-hunting agent built with Anthropic's SDK, featuring five
-  registered tools (job search, ATS fetching, fit scoring, resume tailoring, and application
-  tracking), multi-turn memory via a sliding window, and a Gradio front end. I have built similar
-  systems in other contexts: HamPlan, a RAG-powered course recommendation tool using OpenAI and
-  951 embeddings, deployed as a web app and presented to faculty; and a medical policy extractor
-  using LangChain, Pydantic, and GPT-4 to automate code extraction from clinical documents.
+  My most relevant work is hands-on and shipped. I built DProQV2, a 12-layer Gated Graph
+  Transformer that combines ESM-C protein embeddings with Rosetta energies to predict structure
+  quality scores for over a million protein decoys, scaling training across 20 parallel SLURM jobs
+  on H200 GPUs for the CASP17 benchmark. I also built HamPlan, a retrieval-augmented course
+  recommendation tool using the OpenAI API, deployed as a live web app and presented to faculty,
+  and a multi-agent job-hunting system using the Anthropic SDK with parallel scoring and automated
+  application filing across more than 50 companies.
 
-  My FOMC transcript thesis adds a finance-specific angle — I built a GPT-4o few-shot scoring
-  pipeline to quantify dissent in Fed transcripts and found speech-based scores detect regional
-  unemployment effects with greater statistical power than binary votes. Working on that project
-  made me genuinely curious about how language carries signal in financial contexts.
+  My honors thesis adds an applied research angle. I built a large language model scoring pipeline
+  to measure dissent in FOMC transcripts and found that members' speech reveals more regional
+  disagreement than their recorded votes. It won Hamilton's Soper Research Prize, and a journal
+  version is planned for this summer.
 
-  Thank you for your consideration.
+  I work in Python, R, SQL, and C++, with PyTorch, TensorFlow, and the OpenAI and Anthropic APIs,
+  and I am comfortable across the stack from cluster training to production web apps. Thank you for
+  your consideration.
+
   Sincerely, Benjamin Zhao
